@@ -1,0 +1,172 @@
+/* mypage.css - 3개씩 세로 스크롤 레이아웃 + 버튼 글자색 수정 + 에디터 버튼 추가 */
+
+body {
+    margin: 0;
+    font-family: 'Helvetica', sans-serif;
+    color: #333;
+    background-color: #fff;
+    line-height: 1.6;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 100px;
+    border-bottom: 1px solid #eee;
+}
+
+.logo img {
+    width: 63px;
+    height: 30px;
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.1);
+}
+
+.nav a {
+    margin-left: 25px;
+    text-decoration: none;
+    color: #3b82f6;
+    font-weight: 600;
+    font-size: 23px;
+}
+
+.nav a:hover {
+    color: #000;
+}
+
+/* MyPage 링크 버튼 스타일 시작 */
+/* 기능: MyPage 링크를 버튼처럼 보이게 하고 글자색을 흰색으로 설정 */
+.nav .nav-button {
+    background-color: #3b82f6;
+    color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 15px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+/* 기능: MyPage 버튼 호버 시 스타일 */
+.nav .nav-button:hover {
+    background-color: #2563eb;
+    color: #fff;
+}
+/* MyPage 링크 버튼 스타일 끝 */
+
+
+/* 메인 콘텐츠 영역 시작 */
+.main-content {
+    max-width: 1200px ;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+/* 메인 콘텐츠 영역 끝 */
+
+/* intro-text와 usage는 mypage.html에 없으므로 스타일 유지 안 함 */
+
+/* 유저 프로필 영역 시작 */
+/* 기능: 유저 프로필 전체 컨테이너 레이아웃 */
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 90px 0;
+}
+
+/* 기능: 유저 프로필 이미지 설정 */
+.user-avatar {
+    border-radius: 50%;
+    width: 110px;
+    height: 110px;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+/* 기능: 유저 이름과 기록 수를 담는 컨테이너 */
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 기능: 유저 이름, 기록 수 텍스트 스타일 */
+.user-details span {
+    line-height: 0.5;
+    font-size: 1.0em;
+    font-weight: bold;
+}
+/* 유저 프로필 영역 끝 */
+
+/* 👇👇👇 에디터 버튼 스타일 시작 👇👇👇 */
+.editor-button-container {
+    width: calc(100% - 80px);
+    max-width: 1200px; /* main-content의 max-width와 동일하게 맞춰주면 좋음 */
+    margin: 40px auto 15px auto; /* 👍 위쪽 40px, 좌우 자동(가운데), 아래쪽 15px 마진 */
+    text-align: right; 
+}
+
+/* 기능: 에디터 버튼 이미지 스타일 */
+.editor-button-container img {
+    width: 50px; /* 에디터 아이콘 이미지 크기 */
+    height: auto; /* 비율 유지 */
+    transition: transform 0.3s ease; /* 호버 시 부드럽게 */
+    cursor: pointer; /* 마우스 커서가 손가락 모양으로 바뀌게 */
+}
+
+/* 기능: 에디터 버튼 이미지 호버 시 스타일 */
+.editor-button-container img:hover {
+    transform: scale(1.1); /* 호버 시 살짝 커지게 */
+}
+/* 에디터 버튼 스타일 끝 */
+
+
+/* 사진 갤러리 컨테이너 시작 */
+.photo-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 10px;
+    row-gap: 20px; /*세로 간격*/
+    column-gap: 40px; /*가로 간격*/
+}
+/* 사진 갤러리 컨테이너 끝 */
+
+
+/* 사진 아이템 영역 시작 */
+/* 기능: 각 사진 아이템 컨테이너 너비 및 정렬 */
+.photo-item {
+    /* column-gap 40px 고려한 너비 계산 */
+    width: calc((100% - 80px) / 3);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* 기능: 사진 아이템 안의 이미지 스타일 */
+.photo-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 28px;
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+}
+
+/* 기능: 사진 아이템 안의 설명 텍스트 스타일 */
+.photo-item p {
+    margin-top: 5px;
+    font-size: 1.4em;
+    font-weight: bold;
+    word-break: break-all;
+}
+/* 사진 아이템 영역 끝 */
