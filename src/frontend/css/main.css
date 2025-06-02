@@ -7,6 +7,7 @@ body {
     overflow: hidden;
     animation: fadeIn 0.5s ease-in;
 }
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -15,7 +16,6 @@ body {
     opacity: 1;
   }
 }
-
 
 .header {
     display: flex;
