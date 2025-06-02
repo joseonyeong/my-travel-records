@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>나의 여행 기록 - MyPage - Edit</title> 
+  <link rel="stylesheet" href="../css/mypage_edit.css" />
+
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <a href="main.html">
+        <img src="logo.png" alt="로고" />
+      </a>
+    </div>
+    <nav class="nav">
+      <a href="/">Map</a>
+      <a href="mypage.html" class="nav-button">MyPage</a>
+      <a href="/">Logout</a>
+    </nav>
+  </header>
+
+  <!-- ✅ 마이페이지 메인 영역 -->
+  <main class="mypage-container">
+    <!-- 왼쪽 박스: 프로필 정보 -->
+    <section class="profile-box">
+      <div class="profile-header">
+        <img src="profile_ex.jpg" alt="Profile" class="profile-img" />
+        <div class="profile-name">잔망루피</div>
+        <button class="image-btn">Image</button>
+      </div>
+
+      <div class="form-group">
+        <label>User ID:</label>
+        <input type="text" value="잔망루피" disabled />
+        <button class="check-btn">Check</button>
+      </div>
+
+      <div class="form-group">
+        <label>Password:</label>
+        <input type="password" value="****" />
+        <button class="check-btn">Check</button>
+      </div>
+
+      <div class="form-group">
+        <label>Birth Date:</label>
+        <!--<input type="date" value="birthday" />-->
+        <input type="date" value="2000-01-02" />
+      </div>
+
+      <div class="form-group">
+        <label>Register Date:</label>
+        <!--<input type="date" value="registerday" disabled />-->
+        <input type="date" value="2025-05-20" disabled />
+      </div>
+
+      <div class="action-buttons">
+        <button class="cancel-btn">Cancel</button>
+        <button class="edit-btn">Edit</button>
+      </div>
+    </section>
+
+    <!-- 오른쪽 박스: 여행 통계 -->
+    <section class="travel-summary">
+      <h3>My Travel is ...</h3>
+      <p>My Travel records: <strong>8</strong></p>
+      <p>My Travel locations: <strong>5 / 25</strong></p>
+    </section>
+  </main>
+
+</body>
+</html>

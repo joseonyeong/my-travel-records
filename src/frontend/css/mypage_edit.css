@@ -1,0 +1,175 @@
+
+body {
+    margin: 0;
+    font-family: 'Helvetica', sans-serif;
+    color: #333;
+    background-color: #fff;
+    line-height: 1.6;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 100px;
+    border-bottom: 1px solid #eee;
+}
+
+.logo img {
+    width: 63px;
+    height: 30px;
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.1);
+}
+
+.nav a {
+    margin-left: 25px;
+    text-decoration: none;
+    color: #3b82f6;
+    font-weight: 600;
+    font-size: 23px;
+}
+
+.nav a:hover {
+    color: #000;
+}
+
+/* MyPage 링크 버튼 스타일 시작 */
+/* 기능: MyPage 링크를 버튼처럼 보이게 하고 글자색을 흰색으로 설정 */
+.nav .nav-button {
+    background-color: #3b82f6;
+    color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 15px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+/* 기능: MyPage 버튼 호버 시 스타일 */
+.nav .nav-button:hover {
+    background-color: #2563eb;
+    color: #fff;
+}
+/* MyPage 링크 버튼 스타일 끝 */
+
+
+/* 메인 마이페이지 영역 */
+.mypage-container {
+  display : flex;
+  justify-content: space-between;
+  height: 600px;
+  width: 700px;
+  margin: 60px auto 20px auto;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.profile-box {
+  width: 55%;
+  border: 2px solid #b4ccff;
+  border-radius: 20px;
+  padding: 50px;
+  box-shadow: 4px 4px 12px rgba(0,0,0,0.05);
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.profile-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.profile-name {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.image-btn {
+  margin-left: auto;
+  background-color: #4d8fff;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.form-group label {
+  width: 110px;
+  font-weight: bold;
+}
+
+.form-group input {
+  border: 1px solid lightgray;
+  border-radius: 12px;
+  padding: 4px 12px;
+  margin-right: 10px;
+}
+
+.check-btn {
+  background-color: #4d8fff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.cancel-btn,
+.edit-btn {
+  padding: 10px 24px;
+  border-radius: 20px;
+  font-weight: bold;
+  border: none;
+  margin: 0 10px;
+}
+
+.cancel-btn {
+  background-color: #e0e0e0;
+}
+
+.edit-btn {
+  background-color: #4d8fff;
+  color: white;
+}
+
+/* 여행 정보 요약 */
+.travel-summary {
+  width: 35%;
+  padding: 20px;
+  font-size: 16px;
+}
+
+.travel-summary h3 {
+  color: #3f5efb;
+}
