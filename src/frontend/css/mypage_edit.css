@@ -77,10 +77,10 @@ body {
 }
 
 .profile-box {
-  width: 55%;
-  border: 2px solid #b4ccff;
+  width: 50%;
+  border: 3px solid #b4ccff;
   border-radius: 20px;
-  padding: 50px;
+  padding: 40px;
   box-shadow: 4px 4px 12px rgba(0,0,0,0.05);
 }
 
@@ -165,9 +165,20 @@ body {
 
 /* 여행 정보 요약 */
 .travel-summary {
-  width: 35%;
-  padding: 20px;
+  white-space: nowrap;
+  width: 50%;
+  padding: 60px;
   font-size: 16px;
+}
+.travel-summary span{
+  text-indent: 4em;
+}
+.travel-summary .row {
+  display: flex;
+  justify-content: space-between;
+  white-space: nowrap;
+  text-indent: 2em;
+  margin-bottom: 10px;
 }
 
 .travel-summary h3 {
