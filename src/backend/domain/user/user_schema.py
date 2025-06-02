@@ -1,7 +1,7 @@
 from pydantic import BaseModel, field_validator
 from pydantic_core.core_schema import FieldValidationInfo
 
-# User_Create Pydantic 모델 작성
+# 회원가입 요청에 사용되는 입력 데이터 구조
 class UserCreate(BaseModel):
     id: str  # 사용자 아이디
     pw: str  # 비밀번호
@@ -20,3 +20,9 @@ class UserCreate(BaseModel):
         if 'pw' in info.data and v != info.data['pw']:
             raise ValueError('비밀번호가 일치하지 않습니다')
         return v
+
+# 로그인 요청에 대한 응답 데이터 구조
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+    id: str
