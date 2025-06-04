@@ -42,3 +42,20 @@ fetch('/api/districts') // FastAPI에서 CSV를 JSON으로 변환해서 리턴�
     console.error(err);
     mapContainer.textContent = "지도를 불러오는 데 실패했습니다.";
   });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const logoutBtn = document.querySelector('.nav .nav-btn[href="/logout"]');
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("username");
+      localStorage.setItem("is_login", "false");
+
+      window.location.href = "/index.html";
+    });
+  } else {
+    console.error("로그아웃 버튼을 찾을 수 없습니다.");
+  }
+});
