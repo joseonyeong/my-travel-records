@@ -1,27 +1,33 @@
 document.getElementById("loginForm").addEventListener("submit", async function(e) {
   e.preventDefault();
 
-  const userId = document.getElementById("userId").value.trim();
-  const password = document.getElementById("password").value.trim();
+  const id = document.getElementById("userId").value.trim();
+  const pw = document.getElementById("password").value.trim();
 
-  const formData = new FormData();
-  formData.append("userId", userId);
-  formData.append("password", password);
+  const body = new URLSearchParams();
+  body.append("username", id);
+  body.append("password", pw);
 
   try {
-    const response = await fetch("/login", {
+    const response = await fetch("/api/user/login", {
       method: "POST",
-      body: formData,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: body
     });
 
-    if (response.redirected) {
-      // FastAPI가 리다이렉트하면 그 URL로 이동
-      window.location.href = response.url;
-    } else if (!response.ok) {
+    if (response.ok) {
       const data = await response.json();
-      alert(data.detail || "로그인 실패");
+      alert("로그인 성공!");
+      localStorage.setItem("access_token", data.access_token);
+      window.location.href = "/main.html";
+    } else {
+      const err = await response.json();
+      alert(err.detail || "로그인 실패");
     }
   } catch (error) {
     alert("서버와 연결할 수 없습니다.");
+    console.error("Login Error:", error);
   }
 });

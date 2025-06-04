@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const signupForm = document.getElementById("signupForm");
 
   let isIdChecked = false;
-
-  // 아이디 중복 확인 (나중에 FastAPI와 연결 가능)
+  /*
+  // 아이디 중복 확인 (임시)
   checkBtn.addEventListener("click", async () => {
     const enteredId = userIdInput.value.trim();
     if (!enteredId) {
@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // 나중에 fetch("/check-id", { method: "POST", body: ... })로 변경 가능
     if (enteredId.toLowerCase() === "testuser") {
       alert("이미 존재하는 아이디입니다.");
       isIdChecked = false;
@@ -24,45 +23,47 @@ document.addEventListener("DOMContentLoaded", () => {
       isIdChecked = true;
     }
   });
+  */
 
   // 회원가입 제출
   signupForm.addEventListener("submit", async (e) => {
-    e.preventDefault(); // 자동제출 막기
+    e.preventDefault();
 
+    /*
     if (!isIdChecked) {
       alert("아이디 중복 확인을 먼저 해주세요.");
       return;
     }
+    */
 
-    const userId = userIdInput.value.trim();
-    const password = passwordInput.value.trim();
-    const passwordCheck = passwordCheckInput.value.trim();
+    const id = userIdInput.value.trim();
+    const pw = passwordInput.value.trim();
+    const pw_confirm = passwordCheckInput.value.trim();
 
-    if (password !== passwordCheck) {
+    if (pw !== pw_confirm) {
       alert("비밀번호가 일치하지 않습니다.");
       return;
     }
 
-    const formData = new FormData();
-    formData.append("userId", userId);
-    formData.append("password", password);
-
     try {
-      const response = await fetch("/signup", {
+      const response = await fetch("/api/user/create", {
         method: "POST",
-        body: formData, // FastAPI에서 Form(...)으로 받을 수 있게
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id, pw, pw_confirm }),
       });
 
-      if (response.redirected) {
-        // 회원가입 성공 → FastAPI가 지정한 URL로 리다이렉션
-        window.location.href = response.url;
-      } else if (!response.ok) {
+      if (response.status === 204) {
+        alert("회원가입이 완료되었습니다.");
+        window.location.href = "/index.html"; // 성공 시 리디렉션
+      } else {
         const data = await response.json();
         alert(data.detail || "회원가입 실패");
       }
     } catch (error) {
-      console.error("서버 연결 실패:", error);
-      alert("서버와의 연결 중 문제가 발생했습니다.");
+      console.error("회원가입 중 오류:", error);
+      alert("서버와 연결할 수 없습니다.");
     }
   });
 });

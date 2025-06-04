@@ -31,18 +31,15 @@ js_dir = os.path.join(frontend_dir, "javascript")
 
 # 정적 파일 mount
 app.mount("/static/css", StaticFiles(directory=css_dir), name="css")
-app.mount("/static/js", StaticFiles(directory=js_dir), name="js")
+app.mount("/static/javascript", StaticFiles(directory=js_dir), name="javascript")
 
 @app.get("/")
-async def serve_indegux():
+async def serve_index():
     return FileResponse(os.path.join(html_dir, "index.html"))
 
 @app.get("/{filename}.html")
 async def serve_html(filename: str):
-    filepath = os.path.join(html_dir, f"{filename}.html")
-    if os.path.exists(filepath):
-        return FileResponse(filepath)
-    return {"error": "Page not found"}
+    return FileResponse(os.path.join(html_dir, f"{filename}.html"))
 
 # API 라우터
 app.include_router(user_router.router)
