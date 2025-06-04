@@ -1,5 +1,10 @@
 const mapContainer = document.getElementById('mapContainer');
 
+document.getElementById("plusBtn").addEventListener("click", function () {
+  window.location.href = "../html/board.html";
+});
+
+
 fetch('/api/districts') // FastAPI에서 CSV를 JSON으로 변환해서 리턴하는 API
   .then(res => res.json())
   .then(data => {
