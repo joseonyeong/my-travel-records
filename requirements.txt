@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+beautifulsoup4     # svg mapping 도구
+lxml               # svg 읽어오는 형식
+>>>>>>> origin/joseonyeong
 fastapi
 uvicorn[standard]
 jinja2             # 템플릿 렌더링용

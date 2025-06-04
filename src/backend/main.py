@@ -34,7 +34,7 @@ app.mount("/static/css", StaticFiles(directory=css_dir), name="css")
 app.mount("/static/js", StaticFiles(directory=js_dir), name="js")
 
 @app.get("/")
-async def serve_index():
+async def serve_indegux():
     return FileResponse(os.path.join(html_dir, "index.html"))
 
 @app.get("/{filename}.html")
