@@ -2,11 +2,7 @@ from bs4 import BeautifulSoup
 import csv
 import os
 
-BASE_DIR = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), '..', '..', '..')
-)
-svg_path = os.path.join(BASE_DIR, 'public', 'images', 'Seoul_districts.svg')
-#print("🔍 SVG 경로 확인:", svg_path)
+svg_path = os.path.join(os.path.dirname(__file__), 'Seoul_districts.svg')
 
 with open(svg_path, 'r', encoding='utf-8') as f:
     soup = BeautifulSoup(f, 'xml')
