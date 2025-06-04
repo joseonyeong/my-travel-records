@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>나의 여행 기록</title>
-  <link rel="stylesheet" href="../css/login.css" />
+  <link rel="stylesheet" href="/static/css/login.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
   <header class="header">
     <div class="logo">
-        <a href="index.html">
+        <a href="/index.html">
             <img src="logo.png" alt="로고" />
         </a>
     </div>
@@ -21,7 +21,7 @@
 
     <div class="login-box">
         <a href="login.html" class="login-title-link">Login</a>
-        <form id="loginForm" method="POST">
+        <form id="loginForm">
             <div class="input-group">
                 <i class="fa fa-user icon"></i>
                 <input type="text" id="userId" placeholder="User ID" required />
@@ -33,10 +33,10 @@
             <button type="submit" class="login-btn">Login</button>
         </form>
 
-      <a href="signup.html" class="signup-link">Sign up</a>
+      <a href="/signup.html" class="signup-link">Sign up</a>
     </div>
   </main>
 
-  <script src="../javascript/login.js"></script>
+  <script src="/static/javascript/login.js"></script>
 </body>
 </html>
