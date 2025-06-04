@@ -11,4 +11,3 @@ pydantic[email]    # 이메일 형식 검증
 python-jose[cryptography]
 beautifulsoup4
 lxml
-
