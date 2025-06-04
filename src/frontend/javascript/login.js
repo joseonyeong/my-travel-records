@@ -19,7 +19,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
 
     if (response.ok) {
       const data = await response.json();
-      alert("로그인 성공!");
+      alert("성공적으로 로그인되었습니다");
       localStorage.setItem("access_token", data.access_token);
       window.location.href = "/main.html";
     } else {

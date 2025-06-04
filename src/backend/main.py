@@ -6,12 +6,12 @@ from fastapi.staticfiles import StaticFiles
 from starlette.middleware.cors import CORSMiddleware
 
 from domain.user import user_router
+from dotenv import load_dotenv
 
 app = FastAPI()
+load_dotenv()
 
-origins = [
-    "http://127.0.0.1:5173",    # 또는 "http://localhost:5173"
-]
+origins = [os.getenv("FRONTEND_ORIGIN")]
 
 # JS에서 fetch로 API 요청할 때 필요함
 app.add_middleware(

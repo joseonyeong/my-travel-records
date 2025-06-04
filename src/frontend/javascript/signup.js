@@ -6,8 +6,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const signupForm = document.getElementById("signupForm");
 
   let isIdChecked = false;
-  /*
-  // 아이디 중복 확인 (임시)
+  let lastCheckedId = "";
+
+  // ✅ 아이디 중복 확인
   checkBtn.addEventListener("click", async () => {
     const enteredId = userIdInput.value.trim();
     if (!enteredId) {
@@ -15,30 +16,37 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    if (enteredId.toLowerCase() === "testuser") {
-      alert("이미 존재하는 아이디입니다.");
+    try {
+      const response = await fetch(`/api/user/check-id?id=${encodeURIComponent(enteredId)}`);
+      const data = await response.json();
+
+      if (response.ok && data.available) {
+        alert("사용 가능한 아이디입니다.");
+        isIdChecked = true;
+        lastCheckedId = enteredId;
+      } else {
+        alert(data.detail || "이미 존재하는 아이디입니다.");
+        isIdChecked = false;
+      }
+    } catch (error) {
+      console.error("아이디 중복 확인 중 오류:", error);
+      alert("서버와 연결할 수 없습니다.");
       isIdChecked = false;
-    } else {
-      alert("사용 가능한 아이디입니다.");
-      isIdChecked = true;
     }
   });
-  */
 
   // 회원가입 제출
   signupForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    /*
-    if (!isIdChecked) {
-      alert("아이디 중복 확인을 먼저 해주세요.");
-      return;
-    }
-    */
-
     const id = userIdInput.value.trim();
     const pw = passwordInput.value.trim();
     const pw_confirm = passwordCheckInput.value.trim();
+
+    if (!isIdChecked || lastCheckedId !== id) {
+      alert("아이디 중복 확인을 다시 해주세요.");
+      return;
+    }
 
     if (pw !== pw_confirm) {
       alert("비밀번호가 일치하지 않습니다.");
@@ -56,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (response.status === 204) {
         alert("회원가입이 완료되었습니다.");
-        window.location.href = "/index.html"; // 성공 시 리디렉션
+        window.location.href = "/index.html";
       } else {
         const data = await response.json();
         alert(data.detail || "회원가입 실패");
