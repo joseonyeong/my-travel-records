@@ -1,3 +1,13 @@
-beautifulsoup4
-lxml
+beautifulsoup4     # svg mapping 도구
+lxml               # svg 읽어오는 형식
 fastapi
+uvicorn[standard]
+jinja2             # 템플릿 렌더링용
+python-multipart   # 로그인/회원가입 시 form 데이터 받을 때 필요
+sqlalchemy         # ORM (데이터베이스 연동)
+aiomysql           # MySQL 비동기 드라이버
+pymysql            # MySQL 동기 드라이버
+passlib[bcrypt]    # 비밀번호 해싱
+alembic            # 데이터베이스 마이그레이션 도구
+pydantic[email]    # 이메일 형식 검증
+python-jose[cryptography]
