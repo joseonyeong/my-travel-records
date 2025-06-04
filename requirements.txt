@@ -9,3 +9,5 @@ passlib[bcrypt]    # 비밀번호 해싱
 alembic            # 데이터베이스 마이그레이션 도구
 pydantic[email]    # 이메일 형식 검증
 python-jose[cryptography]
+beautifulsoup4
+lxml
