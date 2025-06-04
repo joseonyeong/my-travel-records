@@ -1,4 +1,4 @@
-fastapi[all]
+fastapi
 uvicorn[standard]
 jinja2             # 템플릿 렌더링용
 python-multipart   # 로그인/회원가입 시 form 데이터 받을 때 필요
