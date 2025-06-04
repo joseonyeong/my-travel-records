@@ -13,6 +13,7 @@ class User(Base):
     pw = Column(String(100))
     profile_img = Column(String(255))
     register_date = Column(DateTime, default=datetime.utcnow)
+    birth = Column(DateTime)
 
     boards = relationship("Board", back_populates="user", cascade="all, delete-orphan")
 
