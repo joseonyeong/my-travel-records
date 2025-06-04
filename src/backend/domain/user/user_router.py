@@ -29,6 +29,14 @@ def user_create(_user_create: user_schema.UserCreate, db: Session = Depends(get_
     # 데이터베이스 추가
     user_crud.create_user(db=db, user_create=_user_create)
 
+# 아이디 중복 체크
+@router.get("/check-id")
+def check_user_id(id: str, db: Session = Depends(get_db)):
+    user = user_crud.get_user(db, id)
+    if user:
+        return {"available": False, "detail": "이미 존재하는 아이디입니다."}
+    return {"available": True}
+
 # 로그인 API
 @router.post("/login", response_model=user_schema.Token)
 def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(),
@@ -53,3 +61,4 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(),
         "token_type": "bearer",
         "id": user.id
     }
+
