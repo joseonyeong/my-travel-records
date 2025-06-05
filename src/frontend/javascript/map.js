@@ -12,7 +12,8 @@ fetch('/api/districts') // FastAPI에서 CSV를 JSON으로 변환해서 리턴�
     const svg = document.createElementNS(svgNS, "svg");
 
     // 실제 서울 지도 SVG 뷰박스 값으로 변경
-    svg.setAttribute("viewBox", "0 0 1000 1000");
+    svg.setAttribute("viewBox", "0 0 1500 1500");
+    svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
     svg.style.width = "100%";
     svg.style.height = "100%";
 
