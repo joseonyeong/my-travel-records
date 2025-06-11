@@ -41,4 +41,4 @@ with open(csv_file, "w", newline="", encoding="utf-8-sig") as f:
     writer.writeheader()
     writer.writerows(data)
 
-print(f"✅ {csv_file} 파일 저장 완료 (총 {len(data)}개 항목)")
+print(f"{csv_file} 파일 저장 완료 (총 {len(data)}개 항목)")
