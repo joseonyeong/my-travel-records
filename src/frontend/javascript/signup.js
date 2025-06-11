@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let isIdChecked = false;
   let lastCheckedId = "";
 
-  // ✅ 아이디 중복 확인
+  // 아이디 중복 확인
   checkBtn.addEventListener("click", async () => {
     const enteredId = userIdInput.value.trim();
     if (!enteredId) {
