@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica', sans-serif;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  } 
+  to {
+    opacity: 1;
+  }
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 100px;
+    border-bottom: 1px solid #eee;
+}
+
+.logo img {
+    width: 63px;
+    height: 30px;
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.1);
+}
+
+.nav {
+    display: flex;
+    gap: 16px;
+}
+
+.nav a {
+    text-decoration: none;
+    font-size: 16px;
+    font-family: inherit;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: transparent;
+    color: #3b82f6;
+    border: 1px solid transparent;
+}
+
+.nav a.active {
+    background-color: #3b5fbf;
+    color: white;
+}
+
+.nav a:hover {
+    color: #000;
+}
+
+/*main-content 사진 작업 후 수정 예정*/
+.main-content {
+    max-width: 900px;
+    margin: 100px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.intro-text h1 {
+    font-size: 5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.intro-text .highlight {
+    color: #3b82f6;
+}   
+
+.intro-text p {
+    margin-top: 15px;
+    font-size: 1.5rem;
+    color: #555;
+}
+
+.usage {
+    margin-top: 100px;
+    /* 추후 사용 방법 섹션 스타일링 */
+}

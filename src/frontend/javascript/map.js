@@ -1,7 +1,7 @@
 const mapContainer = document.getElementById('mapContainer');
 
 document.getElementById("plusBtn").addEventListener("click", function () {
-  window.location.href = "../html/board.html";
+  window.location.href = "/board.html";
 });
 
 
@@ -12,7 +12,8 @@ fetch('/api/districts') // FastAPI에서 CSV를 JSON으로 변환해서 리턴�
     const svg = document.createElementNS(svgNS, "svg");
 
     // 실제 서울 지도 SVG 뷰박스 값으로 변경
-    svg.setAttribute("viewBox", "0 0 1000 1000");
+    svg.setAttribute("viewBox", "0 0 1500 1500");
+    svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
     svg.style.width = "100%";
     svg.style.height = "100%";
 
@@ -42,3 +43,20 @@ fetch('/api/districts') // FastAPI에서 CSV를 JSON으로 변환해서 리턴�
     console.error(err);
     mapContainer.textContent = "지도를 불러오는 데 실패했습니다.";
   });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const logoutBtn = document.querySelector('.nav .nav-btn[href="/logout"]');
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("username");
+      localStorage.setItem("is_login", "false");
+
+      window.location.href = "/index.html";
+    });
+  } else {
+    console.error("로그아웃 버튼을 찾을 수 없습니다.");
+  }
+});

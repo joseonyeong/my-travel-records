@@ -5,9 +5,15 @@ python-multipart   # 로그인/회원가입 시 form 데이터 받을 때 필요
 sqlalchemy         # ORM (데이터베이스 연동)
 aiomysql           # MySQL 비동기 드라이버
 pymysql            # MySQL 동기 드라이버
-passlib[bcrypt]    # 비밀번호 해싱
+passlib            # 비밀번호 해싱
+bcrypt<4.0.0       # bcrypt 4.x 호환 문제 때문에 버전 제한
 alembic            # 데이터베이스 마이그레이션 도구
 pydantic[email]    # 이메일 형식 검증
 python-jose[cryptography]
+<<<<<<< HEAD
 beautifulsoup4
 lxml
+=======
+beautifulsoup4     # svg mapping 도구
+lxml               # svg 읽어오는 형식
+>>>>>>> 87adef99a935f31f5bb487ae28806b2571ad7017
