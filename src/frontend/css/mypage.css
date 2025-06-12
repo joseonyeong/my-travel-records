@@ -2,10 +2,11 @@
 
 body {
     margin: 0;
+    padding: 0;
+    height: 100%;
     font-family: 'Helvetica', sans-serif;
-    color: #333;
-    background-color: #fff;
-    line-height: 1.6;
+    background-color: white;
+    position: relative;
     animation: fadeIn 0.5s ease-in;
 }
 
@@ -36,34 +37,34 @@ body {
   transform: scale(1.1);
 }
 
+.nav {
+    display: flex;
+    gap: 16px;
+}
+
 .nav a {
-    margin-left: 25px;
     text-decoration: none;
+    font-size: 16px;
+    font-family: inherit;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: transparent;
     color: #3b82f6;
-    font-weight: 600;
-    font-size: 23px;
+    border: 1px solid transparent;
+}
+
+.nav a.active {
+    background-color: #3b5fbf;
+    color: white;
 }
 
 .nav a:hover {
     color: #000;
 }
 
-/* MyPage 링크 버튼 스타일 시작 */
-/* 기능: MyPage 링크를 버튼처럼 보이게 하고 글자색을 흰색으로 설정 */
-.nav .nav-button {
-    background-color: #3b82f6;
-    color: #ffffff;
-    padding: 10px 15px;
-    border-radius: 15px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-/* 기능: MyPage 버튼 호버 시 스타일 */
-.nav .nav-button:hover {
-    background-color: #2563eb;
-    color: #fff;
-}
 /* MyPage 링크 버튼 스타일 끝 */
 
 
