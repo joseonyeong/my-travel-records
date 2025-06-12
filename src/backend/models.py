@@ -29,7 +29,6 @@ class Board(Base):
 
     board_id = Column(Integer, primary_key=True, autoincrement=True)
     user_num = Column(Integer, ForeignKey("user.user_num"))
-    # content = Column(Text)  # <<< 수정됨: 이 줄을 삭제
     title = Column(String(255))
     district_code = Column(String(10), ForeignKey("map.district_code"))
     writer_date = Column(DateTime, default=datetime.utcnow)

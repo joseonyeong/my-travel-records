@@ -1,85 +1,45 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>나의 여행 기록 - MyPage</title> 
-  <link rel="stylesheet" href="/static/css/mypage.css" />
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>나의 여행 기록 - MyPage</title>
+    <link rel="stylesheet" href="/static/css/mypage.css" />
 </head>
 <body>
-  <header class="header">
-    <div class="logo">
-      <a href="main.html">
-        <img src="logo.png" alt="로고" />
-      </a>
+    <header class="header">
+        <div class="logo">
+            <a href="main.html">
+                <img src="/images/logo.png" alt="로고" />
+            </a>
+        </div>
+        <nav class="nav">
+            <a href="/">Map</a>
+            <a href="mypage.html" class="nav-button">MyPage</a>
+            <a href="/">Logout</a>
+        </nav>
+    </header>
+
+    <div class="user-info">
+        <img src="/images/profile_ex.jpg" alt="사용자 프로필" class="user-avatar" id="user-avatar" />
+        <div class="user-details">
+            <span id="user-nickname" style="font-size: 30px;"></span><br />
+            <span>
+                My travel records
+                <b id="post-count" style="font-size: 30px;"></b>
+            </span>
+        </div>
     </div>
-    <nav class="nav">
-      <a href="/">Map</a>
-      <a href="mypage.html" class="nav-button">MyPage</a>
-      <a href="/">Logout</a>
-    </nav>
-  </header>
 
-  <!-- 유저 프로필 정보 -->
-  <div class="user-info">
-    <img src="profile_ex.jpg" alt="사용자 프로필" class="user-avatar" />
-    <div class="user-details">
-    <span style="font-size: 30px;">잔망루피</span><br />
-      <span>
-        My travel records
-        <b style="font-size: 30px;">8</b>
-      </span>
+    <div class="editor-button-container">
+        <a href="mypage_edit.html"><img src="/images/Edit.png" alt="에디트 버튼"></a>
     </div>
-  </div>
 
-  <div class="editor-button-container">
-          <a href="mypage_edit.html"><img src="Edit.png" alt="에디트 버튼">
-          </a>
-      </div>
+    <main class="main-content">
+        <section class="photo-gallery" id="photo-gallery">
+            </section>
+    </main>
 
-
-  <main class="main-content">
-    <!-- 👇👇👇 여기! photo-gallery 섹션! 가로 스크롤 버전이야! 👇👇👇 -->
-    <section class="photo-gallery">
-      <div class="photo-item">
-        <img src="profile_ex.jpg" alt="성수는 팝업의 지역" />
-        <p>성수는 팝업의 지역</p>
-      </div>
-      <div class="photo-item">
-        <img src="profile_ex.jpg" alt="성수는 팝업의 지역" />
-        <p>성수는 팝업의 지역</p>
-      </div>
-      <div class="photo-item">
-        <img src="profile_ex.jpg" alt="성수는 팝업의 지역" />
-        <p>성수는 팝업의 지역</p>
-      </div>
-      <!-- 사진 더 추가해서 가로 스크롤 확인해봐! -->
-      <div class="photo-item">
-        <img src="profile_ex.jpg" alt="성수는 팝업의 지역" />
-        <p>또 다른 여행 기록</p>
-      </div>
-       <div class="photo-item">
-        <img src="profile_ex.jpg" alt="성수는 팝업의 지역" />
-        <p>다섯 번째 사진</p>
-      </div>
-      <div class="photo-item">
-        <img src="profile_ex.jpg" alt="성수는 팝업의 지역" />
-        <p>마지막 사진!</p>
-      </div>
-       <div class="photo-item">
-        <img src="profile_ex.jpg" alt="성수는 팝업의 지역" />
-        <p>사진 7</p>
-      </div>
-       <div class="photo-item">
-        <img src="profile_ex.jpg" alt="성수는 팝업의 지역" />
-        <p>사진 8</p>
-      </div>
-      <div class="photo-item">
-        <img src="profile_ex.jpg" alt="성수는 팝업의 지역" />
-        <p>사진 9</p>
-      </div>
-    </section>
-  </main>
+    <script src="/static/javascript/mypage.js"></script>
 </body>
 </html>
