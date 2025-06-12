@@ -5,6 +5,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.cors import CORSMiddleware
 
+from domain.board import board_router # @@@@ 보드 도메인추가
 from domain.user import user_router
 from domain.map.districts import router as districts_router
 from dotenv import load_dotenv
@@ -29,6 +30,9 @@ frontend_dir = os.path.abspath(os.path.join(base_dir, "..", "frontend"))
 html_dir = os.path.join(frontend_dir, "html")
 css_dir = os.path.join(frontend_dir, "css")
 js_dir = os.path.join(frontend_dir, "javascript")
+uploads_dir = os.path.join(base_dir, "..", "uploads") # @@@@ 업로드 폴더 경로 추가 임시 이미지 파일 저장위치
+os.makedirs(uploads_dir, exist_ok=True) # @@@@ 업로드 폴더 생성 문구 
+
 
 # 정적 파일 mount
 app.mount("/static/css", StaticFiles(directory=css_dir), name="css")
@@ -45,3 +49,4 @@ async def serve_html(filename: str):
 # API 라우터
 app.include_router(user_router.router)
 app.include_router(districts_router)
+app.include_router(board_router.router, prefix="/api/board", tags=["Board"]) # @@@@ 보드 라우터 추가

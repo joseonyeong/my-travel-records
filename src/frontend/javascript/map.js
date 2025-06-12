@@ -1,7 +1,7 @@
 const mapContainer = document.getElementById('mapContainer');
 
 document.getElementById("plusBtn").addEventListener("click", function () {
-  window.location.href = "../html/board.html";
+  window.location.href = "/board.html";
 });
 
 
