@@ -17,19 +17,6 @@ body {
   }
 }
 
-.background-strip {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 380px;
-    height: 100%;
-    transform: translateX(-50%);
-    background: linear-gradient(180deg, #3b82f6, #60a5fa);
-    z-index: 0;
-}
-
-
 .logo {
     position: absolute;
     top: 30%;
@@ -48,12 +35,11 @@ body {
 }
 
 .login-box {
-    position: relative;
     z-index: 1;
     background: white;
     width: 800px;
     height: 500px;
-    margin: 10% auto;
+    margin: 5% auto;
     border: 1px solid #3b82f6;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -80,6 +66,8 @@ body {
 }
 
 .login-title-link {
+    position: absolute;
+    top: 30%;
     color: #ffffff;
     font-size: 50px;
     font-weight: bold;
@@ -92,6 +80,15 @@ body {
     transform: scale(1.1);
 }
 
+.title-text-group {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: auto;
+}
+
 .login-form-area {
     width: 50%;
     padding: 40px;
@@ -100,6 +97,16 @@ body {
     justify-content: center;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
+}
+
+.subtitle-texts {
+    position: absolute;
+}
+
+.subtitle-text {
+    font-size: 13px;
+    color: #ffffff;
+    margin: 2px 0;
 }
 
 .input-group {

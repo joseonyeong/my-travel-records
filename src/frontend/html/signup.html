@@ -8,40 +8,42 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
-  <header class="header">
-    <div class="logo">
-      <a href="/index.html">
-        <img src="logo.png" alt="로고" />
-      </a>
-    </div>
-  </header>
-
   <main>
-    <div class="background-strip"></div>
-
     <div class="signup-box">
-      <h2><a href="signup.html" class="signup-title-link">Sign up</a></h2>
-      <form id="signupForm">
-        <div class="input-group with-button">
-            <i class="fa-solid fa-user icon"></i>
-            <input type="text" id="userId" placeholder="User ID" required />
-            <button type="button" class="check-btn">Check</button>
+      <div class="signup-inner">
+        <div class="signup-title-area">
+          <div class="title-text-group">
+            <a href="signup.html" class="signup-title-link">Sign up</a>
+          </div>
+          <div class="subtitle-texts">
+            <p class="subtitle-text">Create a new account to complete your map.</p>
+          </div>
         </div>
+        <div class="signup-form-area">
+          <form id="signupForm">
+            <div class="input-group with-button">
+              <i class="fa-solid fa-user icon"></i>
+              <input type="text" id="userId" placeholder="User ID" required />
+              <button type="button" class="check-btn">Check</button>
+            </div>
 
-        <div class="input-group">
-            <i class="fa-solid fa-lock icon"></i>
-            <input type="password" id="password" placeholder="Password" required />
+            <div class="input-group">
+              <i class="fa-solid fa-lock icon"></i>
+              <input type="password" id="password" placeholder="Password" required />
+            </div>
+
+            <div class="input-group">
+              <i class="fa-solid fa-check-double icon"></i>
+              <input type="password" id="passwordCheck" placeholder="Password Check" required />
+            </div>
+
+            <div class="button-wrap">
+              <button type="submit" class="signup-btn">Create account</button>
+            </div>
+          </form>
+          <a href="/login.html" class="sign-link">ID already exists</a>
         </div>
-
-        <div class="input-group">
-            <i class="fa-solid fa-check-double icon"></i>
-            <input type="password" id="passwordCheck" placeholder="Password Check" required />
-        </div>
-
-        <button type="submit" class="signup-btn">Create account</button>
-      </form>
-
-      <a href="/login.html" class="sign-link">ID already exists</a>
+      </div>
     </div>
   </main>
 
