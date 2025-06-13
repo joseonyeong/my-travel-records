@@ -17,23 +17,6 @@ body {
     }
 }
 
-.logo {
-    position: absolute;
-    top: 30%;
-    transform: translateX(-50%);
-    z-index: 2;
-}
-
-.logo img {
-    width: 63px;
-    height: 30px;
-    transition: transform 0.3s ease;
-}
-
-.logo img:hover {
-    transform: scale(1.1);
-}
-
 .signup-box {
     z-index: 1;
     background: white;
