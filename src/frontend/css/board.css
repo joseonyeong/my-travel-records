@@ -51,9 +51,13 @@ body {
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    margin-bottom: 1rem;
+    transition: height 0.3s ease;
 }
-
+/* 사진 업로드시 미리보기 크기 조정 */
+.image-upload-wrapper.uploaded {
+   width: 300px;
+    height: 300px; 
+}
 .image-upload-wrapper img {
     width: 40%;
     height: 40%;
