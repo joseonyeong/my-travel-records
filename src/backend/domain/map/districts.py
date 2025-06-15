@@ -7,9 +7,11 @@ from domain.user.user_auth import get_current_user
 import csv
 import os
 
-router = APIRouter()
+router = APIRouter(
+    prefix="/api/districts"
+)
 
-@router.get("/api/districts")
+@router.get("")
 def get_districts():
     csv_path = os.path.join(os.path.dirname(__file__), "seoul_districts_mapped.csv")
 
@@ -20,7 +22,7 @@ def get_districts():
             for row in reader:
                 districts.append({
                     "id": row["id"],
-                    "display_name": row["display_name"],
+                    "display_nme": row["display_name"],
                     "color": row["color"],
                     "value": row["value"],
                     "d": row["d"]
@@ -29,7 +31,7 @@ def get_districts():
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
 
-@router.get("/api/districts/{district_code}/image")
+@router.get("/{district_code}/image")
 def get_district_images(
     district_code: str,
     db: Session = Depends(get_db),
