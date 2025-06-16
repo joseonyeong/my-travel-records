@@ -11,7 +11,7 @@ router = APIRouter(
     prefix="/api/districts"
 )
 
-@router.get("")
+@router.get("/")
 def get_districts():
     csv_path = os.path.join(os.path.dirname(__file__), "seoul_districts_mapped.csv")
 
@@ -22,7 +22,7 @@ def get_districts():
             for row in reader:
                 districts.append({
                     "id": row["id"],
-                    "display_nme": row["display_name"],
+                    "display_name": row["display_name"],
                     "color": row["color"],
                     "value": row["value"],
                     "d": row["d"]
