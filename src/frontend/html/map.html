@@ -26,6 +26,20 @@
 
   <button class="floating-btn" id="plusBtn">+</button>
 
+  <!-- 팝업창 코드 -->
+  <div id="popup" class="modal">
+    <div class="modal-overlay" onclick="closePopup()"></div>
+    <div class="modal-content">
+      <button class="close" onclick="closePopup()">&times;</button>
+      <h2 class="district-name" id="districtName"></h2>
+      <div class="image-viewer">
+        <button class="arrow" onclick="prevImage()">←</button>
+        <img id="popupImage" src="" alt="자치구 이미지" />
+        <button class="arrow" onclick="nextImage()">→</button>
+      </div>
+    </div>
+  </div>
+
   <script src="/static/javascript/map.js"></script>
 </body>
 </html>

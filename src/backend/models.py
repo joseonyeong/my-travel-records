@@ -1,8 +1,8 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, Session
 from datetime import datetime
 
-from database import Base
+from database import Base, SessionLocal
 
 # User 모델 (user 테이블)
 class User(Base):
@@ -21,9 +21,8 @@ class User(Base):
 class Map(Base):
     __tablename__ = "map"
 
-    district_code = Column(String(10), primary_key=True)
+    district_code = Column(String(30), primary_key=True)
     district_name = Column(String(50), nullable=False)
-    coordinate = Column(String(100))
 
     boards = relationship("Board", back_populates="district")
 
@@ -34,7 +33,7 @@ class Board(Base):
     board_id = Column(Integer, primary_key=True, autoincrement=True)
     user_num = Column(Integer, ForeignKey("user.user_num"))
     title = Column(String(255))
-    district_code = Column(String(10), ForeignKey("map.district_code"))
+    district_code = Column(String(30), ForeignKey("map.district_code"))
     writer_date = Column(DateTime, default=datetime.utcnow)
     update_date = Column(DateTime, default=datetime.utcnow)
 
@@ -51,3 +50,50 @@ class BoardImg(Base):
     img_url = Column(String(255))
 
     board = relationship("Board", back_populates="images")
+
+def insert_default_map_data():
+    districts = {
+        'Dobong-gu': '도봉구',
+        'Dongdaemun-gu': '동대문구',
+        'Dongjak-gu': '동작구',
+        'Eunpyeong-gu': '은평구',
+        'Gangbuk-gu': '강북구',
+        'Gangdong-gu': '강동구',
+        'Gangseo-gu': '강서구',
+        'Geumcheon-gu': '금천구',
+        'Guro-gu': '구로구',
+        'Gwanak-gu': '관악구',
+        'Gwangjin-gu': '광진구',
+        'Gangnam-gu': '강남구',
+        'Jongno-gu': '종로구',
+        'Jung-gu': '중구',
+        'Jungnang-gu': '중랑구',
+        'Mapo-gu': '마포구',
+        'Nowon-gu': '노원구',
+        'Seocho-gu': '서초구',
+        'Seodaemun-gu': '서대문구',
+        'Seongbuk-gu': '성북구',
+        'Seongdong-gu': '성동구',
+        'Songpa-gu': '송파구',
+        'Yangcheon-gu': '양천구',
+        'Yeongdeungpo-gu': '영등포구',
+        'Yongsan-gu': '용산구'
+    }
+
+    session: Session = SessionLocal()
+    try:
+        for eng_name in districts:
+            district_code = eng_name.lower()  # ex: 'dongjak-gu'
+            district_name = eng_name.split('-')[0].lower()  # ex: 'dongjak'
+            # districts[eng_name]로 넣으면 한글 이름 그대로 
+
+            if not session.query(Map).filter_by(district_code=district_code).first():
+                session.add(Map(district_code=district_code, district_name=district_name))
+
+        session.commit()
+        print("Map 테이블에 기본 데이터 삽입 완료")
+    except Exception as e:
+        session.rollback()
+        print("오류 발생:", e)
+    finally:
+        session.close()

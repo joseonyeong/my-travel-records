@@ -12,3 +12,4 @@ pydantic[email]    # 이메일 형식 검증
 python-jose[cryptography]
 beautifulsoup4     # svg mapping 도구
 lxml               # svg 읽어오는 형식
+pandas             # svg db insert 도구
