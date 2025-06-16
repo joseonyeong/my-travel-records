@@ -8,6 +8,8 @@ from domain.user import user_crud, user_schema
 from domain.user.user_auth import create_access_token, get_current_user
 from domain.user.user_crud import pwd_context
 
+from models import User  # 유저 데이터호출시 필요한 User클래스
+
 router = APIRouter(
     prefix="/api/user",
 )
@@ -56,3 +58,37 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(),
 @router.get("/me")
 def read_users_me(current_user=Depends(get_current_user)):
     return {"id": current_user.id}
+
+
+# 사용자정보 업데이트 ()
+@router.patch("/me/edit", response_model=user_schema.UserResponse)
+def update_current_user_profile(
+    user_update: user_schema.UserUpdate, # 1. 요청 본문은 UserUpdate 스키마를 따름
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user) # 2. 현재 로그인된 사용자 정보를 가져옴
+):
+    """
+    현재 로그인된 사용자의 프로필 정보(비밀번호, 생일 등)를 수정합니다.
+    """
+    if not current_user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="인증이 필요합니다.")
+        
+    # 3. CRUD 함수를 호출하여 DB 정보 업데이트
+    updated_user = user_crud.update_user(
+        db=db, 
+        db_user=current_user, 
+        user_update=user_update
+    )
+    
+    return updated_user
+
+
+# 사용자 정보 반환 현재유저만 조회가능하도록 /me 추가
+@router.get("/me", response_model=user_schema.UserProfile)
+def get_my_profile(current_user: User = Depends(get_current_user)):
+    """
+    현재 로그인된 사용자의 상세 프로필 정보를 조회합니다.
+    (이전에 작성한 get_user_profile 로직과 유사하지만,
+     경로를 '/me'로 하여 현재 유저만 조회하도록 한정합니다.)
+    """
+    return current_user
