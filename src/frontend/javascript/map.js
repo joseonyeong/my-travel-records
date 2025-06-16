@@ -77,7 +77,7 @@ let currentIndex = 0;
 function openPopup(districtName, images) {
   currentImages = images;
   currentIndex = 0;
-  document.getElementById('districtName').innerText = districtName + '구';
+  document.getElementById('districtName').innerText = districtName;
   updateImage();
   document.getElementById('popup').style.display = 'block';
 }
