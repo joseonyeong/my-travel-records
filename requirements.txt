@@ -16,4 +16,3 @@ lxml
 =======
 beautifulsoup4     # svg mapping 도구
 lxml               # svg 읽어오는 형식
->>>>>>> 87adef99a935f31f5bb487ae28806b2571ad7017
