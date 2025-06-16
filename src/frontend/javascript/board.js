@@ -1,53 +1,84 @@
-// src/frontend/javascript/post.js
+// src/frontend/javascript/board.js
 
-// 웹 페이지의 모든 HTML 요소가 로드된 후에 이 스크립트를 실행합니다.
 document.addEventListener('DOMContentLoaded', function() {
     
-    // HTML에서 필요한 요소들을 가져옵니다.
-    const imageInput = document.getElementById('imageInput');        // <input type="file">
-    const previewImage = document.getElementById('previewImage');      // <img> 미리보기 태그
-    const deleteImageButton = document.getElementById('deleteImage'); // 삭제 버튼
-    const imageUploadWrapper = document.querySelector('.image-upload-wrapper'); // 이미지 업로드 영역
+    // --- 이미지 미리보기 로직 (기존과 동일) ---
+    const imageInput = document.getElementById('imageInput');
+    const previewImage = document.getElementById('previewImage');
+    const deleteImageButton = document.getElementById('deleteImage');
+    const imageUploadWrapper = document.querySelector('.image-upload-wrapper');
+    const defaultIconPath = '/images/CAMERAICON.png';
 
-    // 기본 카메라 아이콘 이미지의 경로를 저장해 둡니다.
-    const defaultIconPath = '/html/CAMERAICON.png';
-
-    // 이미지 업로드 영역을 클릭하면 숨겨진 input[type=file]이 클릭되도록 합니다.
     imageUploadWrapper.addEventListener('click', function(event) {
-        // 만약 삭제 버튼을 누른 거라면 파일 선택창이 열리지 않도록 합니다.
         if (event.target !== deleteImageButton) {
             imageInput.click();
         }
     });
 
-    // 사용자가 이미지 파일을 선택했을 때 실행될 함수입니다.
     imageInput.addEventListener('change', function(event) {
-        const file = event.target.files[0]; // 선택된 파일 가져오기
-
+        const file = event.target.files[0];
         if (file) {
-            // FileReader 객체를 사용해 선택된 파일을 읽습니다.
             const reader = new FileReader();
-            
-            // 파일 읽기가 완료되면 실행될 콜백 함수입니다.
             reader.onload = function(e) {
-                // 읽은 파일 데이터를 이미지 미리보기 태그의 src로 설정합니다.
                 previewImage.src = e.target.result;
-                // 삭제 버튼을 보여줍니다.
                 deleteImageButton.style.display = 'block';
             }
-            
-            // 파일을 데이터 URL 형식으로 읽어들입니다.
             reader.readAsDataURL(file);
         }
     });
 
-    // 삭제 버튼을 클릭했을 때 실행될 함수입니다.
     deleteImageButton.addEventListener('click', function() {
-        // 이미지 미리보기를 기본 카메라 아이콘으로 되돌립니다.
         previewImage.src = defaultIconPath;
-        // 파일 선택 input의 값을 비워서, 폼 제출 시 파일이 전송되지 않도록 합니다.
         imageInput.value = ''; 
-        // 삭제 버튼을 다시 숨깁니다.
         deleteImageButton.style.display = 'none';
+    });
+
+    // --- (가장 중요) 폼 제출 처리 로직 추가 ---
+    const boardForm = document.getElementById('board-form');
+
+    boardForm.addEventListener('submit', function(event) {
+        // 1. 폼의 기본 제출 동작(페이지 새로고침)을 막습니다.
+        event.preventDefault();
+
+        // 2. localStorage에서 토큰을 가져옵니다.
+        const token = localStorage.getItem('access_token');
+        if (!token) {
+            alert('로그인이 필요합니다.');
+            window.location.href = '/login.html';
+            return;
+        }
+
+        // 3. 폼 데이터를 FormData 객체로 만듭니다.
+        const formData = new FormData(boardForm);
+
+        // 4. fetch를 사용해 서버에 데이터를 전송합니다.
+        fetch('/api/board/create', {
+            method: 'POST',
+            headers: {
+                // 5. Authorization 헤더에 토큰을 담아 보냅니다.
+                'Authorization': `Bearer ${token}`
+            },
+            body: formData // 폼 데이터를 body에 담습니다.
+        })
+        .then(response => {
+            // 서버의 응답이 리다이렉트(페이지 이동) 응답이면
+            if (response.redirected) {
+                // 해당 URL로 페이지를 이동시킵니다.
+                window.location.href = response.url;
+            } else {
+                // 다른 응답이 오면 JSON으로 파싱합니다.
+                return response.json();
+            }
+        })
+        .then(data => {
+            if (data) {
+                // 만약 에러 메시지가 있다면 표시합니다.
+                alert(data.detail || '알 수 없는 오류가 발생했습니다.');
+            }
+        })
+        .catch(error => {
+            console.error('게시글 작성 중 오류 발생:', error);
+            alert('게시글 작성에 실패했습니다.');
+        });
     });
 });
