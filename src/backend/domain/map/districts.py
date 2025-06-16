@@ -39,7 +39,7 @@ def get_district_images(
     
     user_boards = db.query(Board).filter(
         Board.district_code == district_code,
-        Board.user_num == current_user.id
+        Board.user_num == current_user.user_num
     ).all()
 
     if not user_boards:
