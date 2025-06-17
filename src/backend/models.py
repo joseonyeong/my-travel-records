@@ -84,8 +84,7 @@ def insert_default_map_data():
     try:
         for eng_name in districts:
             district_code = eng_name.lower()  # ex: 'dongjak-gu'
-            district_name = eng_name.split('-')[0].lower()  # ex: 'dongjak'
-            # districts[eng_name]로 넣으면 한글 이름 그대로 
+            district_name = districts[eng_name]
 
             if not session.query(Map).filter_by(district_code=district_code).first():
                 session.add(Map(district_code=district_code, district_name=district_name))
