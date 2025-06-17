@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Depends, status
+from fastapi import APIRouter, HTTPException, Depends, status, UploadFile, File
 from fastapi.security import OAuth2PasswordRequestForm
 
 from sqlalchemy.orm import Session
@@ -7,8 +7,10 @@ from database import get_db
 from domain.user import user_crud, user_schema
 from domain.user.user_auth import create_access_token, get_current_user
 from domain.user.user_crud import pwd_context
+from models import User  
 
-from models import User  # 유저 데이터호출시 필요한 User클래스
+import os
+import shutil
 
 router = APIRouter(
     prefix="/api/user",
@@ -61,26 +63,19 @@ def read_users_me(current_user=Depends(get_current_user)):
 
 
 # 사용자정보 업데이트 ()
-@router.patch("/me/edit", response_model=user_schema.UserResponse)
-def update_current_user_profile(
-    user_update: user_schema.UserUpdate, # 1. 요청 본문은 UserUpdate 스키마를 따름
+@router.put("/update", status_code=status.HTTP_204_NO_CONTENT)
+def user_update(
+    _user_update: user_schema.UserUpdate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user) # 2. 현재 로그인된 사용자 정보를 가져옴
+    current_user: User = Depends(get_current_user)
 ):
     """
-    현재 로그인된 사용자의 프로필 정보(비밀번호, 생일 등)를 수정합니다.
+    현재 로그인된 사용자의 정보(비밀번호, 생일 등)를 수정합니다.
     """
     if not current_user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="인증이 필요합니다.")
-        
-    # 3. CRUD 함수를 호출하여 DB 정보 업데이트
-    updated_user = user_crud.update_user(
-        db=db, 
-        db_user=current_user, 
-        user_update=user_update
-    )
-    
-    return updated_user
+
+    user_crud.update_user(db=db, db_user=current_user, user_update=_user_update)
 
 
 # 사용자 정보 반환 현재유저만 조회가능하도록 /me 추가
@@ -88,7 +83,31 @@ def update_current_user_profile(
 def get_my_profile(current_user: User = Depends(get_current_user)):
     """
     현재 로그인된 사용자의 상세 프로필 정보를 조회합니다.
-    (이전에 작성한 get_user_profile 로직과 유사하지만,
-     경로를 '/me'로 하여 현재 유저만 조회하도록 한정합니다.)
     """
+    # TODO: 향후 게시물, 방문 장소 수를 계산하는 로직 추가 필요
+    # user_profile = user_schema.UserProfile.from_orm(current_user)
+    # user_profile.post_count = ...
+    # user_profile.location_count = ...
     return current_user
+
+# 프로필 이미지 업로드 API
+@router.post("/upload-profile-image", status_code=status.HTTP_204_NO_CONTENT)
+def upload_profile_image(
+    file: UploadFile = File(...),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    UPLOAD_DIRECTORY = "./src/frontend/public/images/profiles"
+    os.makedirs(UPLOAD_DIRECTORY, exist_ok=True)
+    
+    file_extension = file.filename.split('.')[-1]
+    filename = f"{current_user.id}.{file_extension}"
+    file_path = os.path.join(UPLOAD_DIRECTORY, filename)
+
+    with open(file_path, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+
+    file_url = f"/public/images/profiles/{filename}"
+    current_user.profile_img = file_url
+    db.add(current_user)
+    db.commit()

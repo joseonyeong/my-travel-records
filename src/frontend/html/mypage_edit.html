@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>나의 여행 기록 - MyPage - Edit</title> 
   <link rel="stylesheet" href="/static/css/mypage_edit.css" />
-
 </head>
 <body>
   <header class="header">
@@ -24,36 +23,37 @@
   <main class="mypage-container">
     <section class="profile-box">
       <div class="profile-header">
-        <img src="/static/images/profile_ex.jpg" alt="Profile" class="profile-img" />
-        <div class="profile-name">잔망루피</div>
-        <button class="image-btn">Image</button>
+        <label for="profile-image-upload" class="profile-img-label">
+          <img src="/static/images/profile_ex.jpg" alt="Profile" class="profile-img" id="profile-img" />
+        </label>
+        <input type="file" id="profile-image-upload" accept="image/*" style="display: none;" />
+        <div id="profile-name" class="profile-name"></div>
       </div>
 
       <div class="form-group">
-        <label>User ID:</label>
-        <input type="text" value="잔망루피" disabled />
+        <label>Nickname:</label>
+        <input type="text" value="" id="nickname" />
         <button class="check-btn">Check</button>
       </div>
 
       <div class="form-group">
         <label>Password:</label>
-        <input type="password" value="****" />
-        <button class="check-btn">Check</button>
+        <input type="password" value="****" id="password" />
       </div>
 
       <div class="form-group">
         <label>Birth Date:</label>
-        <input type="date" value="2000-01-02" />
+        <input type="date" value="" id="birth-date" />
       </div>
 
       <div class="form-group">
         <label>Register Date:</label>
-        <input type="date" value="2025-05-20" disabled />
+        <input type="date" value="" disabled id="register-date" />
       </div>
 
       <div class="action-buttons">
         <button class="cancel-btn">Cancel</button>
-        <button class="edit-btn">Edit</button>
+        <button class="edit-btn">Save</button>
       </div>
     </section>
 
@@ -61,14 +61,15 @@
       <h3>My Travel is ...</h3>
       <div class="row">
         <span>My Travel records:</span>
-        <strong>8</strong>
+        <strong id="post-count">0</strong>
       </div>
       <div class="row">
         <span>My Travel locations:</span>
-        <strong>5 / 25</strong>
+        <strong id="location-count">0 / 25</strong>
       </div>
     </section>
   </main>
-
+  
+  <script src="/static/javascript/mypage_edit.js"></script>
 </body>
 </html>

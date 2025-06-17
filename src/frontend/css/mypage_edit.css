@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Helvetica', sans-serif;
-  background-color: #f8f9fa; /* 전체 배경색을 약간 부드럽게 */
+  background-color: #f8f9fa;
   animation: fadeIn 0.5s ease-in;
 }
 
@@ -11,9 +11,7 @@ body {
   to { opacity: 1; }
 }
 
-/* ==============================================
- * 헤더 (기존과 유사)
- * ============================================== */
+/* 헤더 */
 .header {
   display: flex;
   justify-content: space-between;
@@ -43,27 +41,23 @@ body {
   color: #000;
 }
 
-/* ==============================================
- * 메인 콘텐츠 (2단 레이아웃으로 수정)
- * ============================================== */
+/* 메인 콘텐츠 (2단 레이아웃) */
 .mypage-container {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 40px; /* 두 영역 사이의 간격 */
+  gap: 40px;
   padding: 50px 20px;
 }
 
-/* ==============================================
- * 프로필 수정 카드 (왼쪽 영역)
- * ============================================== */
+/* 프로필 수정 카드 (왼쪽) */
 .profile-box {
   background: white;
   border: 1px solid #e0e0e0;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   padding: 30px 40px;
-  width: 550px; /* 카드 너비 고정 */
+  width: 550px;
 }
 
 .profile-header {
@@ -73,9 +67,14 @@ body {
   margin-bottom: 30px;
 }
 
+/* 프로필 이미지 (클릭 가능하도록 커서 변경) */
+.profile-img-label {
+  cursor: pointer;
+}
+
 .profile-img {
   border-radius: 50%;
-  width: 60px; /* 이미지 크기 조정 */
+  width: 60px;
   height: 60px;
   object-fit: cover;
 }
@@ -86,17 +85,6 @@ body {
   margin-left: 15px;
 }
 
-.image-btn {
-  margin-left: auto; /* Image 버튼을 오른쪽 끝으로 밀기 */
-  background-color: #3b82f6;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
 .form-group {
   display: flex;
   align-items: center;
@@ -105,8 +93,9 @@ body {
 }
 
 .form-group label {
-  width: 110px; /* 라벨 너비 고정으로 정렬 맞춤 */
+  width: 110px;
   color: #555;
+  font-weight: bold;
 }
 
 .form-group input {
@@ -134,7 +123,7 @@ body {
 
 .action-buttons {
   display: flex;
-  justify-content: flex-end; /* 버튼들을 오른쪽으로 정렬 */
+  justify-content: flex-end;
   gap: 10px;
   margin-top: 30px;
   width: 100%;
@@ -160,9 +149,7 @@ body {
   border-color: #3b82f6;
 }
 
-/* ==============================================
- * 여행 기록 요약 (오른쪽 영역)
- * ============================================== */
+/* 여행 기록 요약 (오른쪽) */
 .travel-summary {
   padding-top: 10px;
 }
