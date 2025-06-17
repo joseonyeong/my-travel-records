@@ -1,186 +1,236 @@
 
+:root {
+  /* 색상 변수 */
+  --primary-color: #3b82f6;
+  --primary-active-color: #3b5fbf;
+  --text-color-base: #333;
+  --text-color-dark: #000;
+  --background-color: #fff;
+  --border-color: #eee;
+  --white-color: #fff;
+  --delete-bg-color: rgba(0, 0, 0, 0.5);
+
+  /* 폰트 변수 */
+  --font-primary: 'Helvetica', sans-serif;
+
+  /* 크기 및 간격 변수 (rem 단위) */
+  --spacing-xs: 0.5rem;  /* 5px */
+  --spacing-s: 1rem;   /* 10px */
+  --spacing-m: 1.5rem;  /* 15px */
+  --spacing-l: 2rem;   /* 20px */
+  --spacing-xl: 4rem;  /* 40px */
+  --spacing-xxl: 9rem; /* 90px */
+
+  /* 기타 디자인 변수 */
+  --border-radius-s: 6px;
+  --border-radius-l: 28px;
+  --transition-fast: all 0.3s ease;
+}
+
+/* rem 단위를 1rem = 10px로 계산하기 쉽게 설정 */
+html {
+  font-size: 62.5%; /* 16px * 62.5% = 10px */
+}
+
 body {
-    margin: 0;
-    font-family: 'Helvetica', sans-serif;
-    color: #333;
-    background-color: #fff;
-    line-height: 1.6;
-    animation: fadeIn 0.5s ease-in;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-primary);
+  background-color: var(--background-color);
+  animation: fadeIn 0.5s ease-in;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
+/* ==============================================
+ * [2] 헤더 및 내비게이션
+ * ============================================== */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 100px;
-    border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-l) 10rem;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .logo img {
-    width: 63px;
-    height: 30px;
-    transition: transform 0.3s ease;
+  width: 6.3rem;
+  height: 3rem;
+  transition: var(--transition-fast);
 }
 
 .logo img:hover {
   transform: scale(1.1);
 }
 
+.nav {
+  display: flex;
+  gap: 1.6rem;
+}
+
 .nav a {
-    margin-left: 25px;
-    text-decoration: none;
-    color: #3b82f6;
-    font-weight: 600;
-    font-size: 23px;
+  text-decoration: none;
+  font-size: 1.6rem;
+  font-weight: bold;
+  padding: 0.8rem 1.6rem;
+  border-radius: var(--border-radius-s);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1px solid transparent;
+}
+
+.nav a.active {
+  background-color: var(--primary-active-color);
+  color: var(--white-color);
 }
 
 .nav a:hover {
-    color: #000;
+  color: var(--text-color-dark);
 }
 
-/* MyPage 링크 버튼 스타일 시작 */
-/* 기능: MyPage 링크를 버튼처럼 보이게 하고 글자색을 흰색으로 설정 */
-.nav .nav-button {
-    background-color: #3b82f6;
-    color: #ffffff;
-    padding: 10px 15px;
-    border-radius: 15px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+/* ==============================================
+ * [3] 메인 콘텐츠 및 프로필
+ * ============================================== */
+.main-content {
+  max-width: 120rem;
+  margin: 5rem auto;
+  padding: 0 var(--spacing-l);
 }
 
-/* 기능: MyPage 버튼 호버 시 스타일 */
-.nav .nav-button:hover {
-    background-color: #2563eb;
-    color: #fff;
-}
-/* MyPage 링크 버튼 스타일 끝 */
-
-
-/* 메인 마이페이지 영역 */
-.mypage-container {
-  display : flex;
-  justify-content: space-between;
-  height: 600px;
-  width: 700px;
-  margin: 60px auto 20px auto;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-.profile-box {
-  width: 50%;
-  border: 3px solid #b4ccff;
-  border-radius: 20px;
-  padding: 40px;
-  box-shadow: 4px 4px 12px rgba(0,0,0,0.05);
-}
-
-.profile-header {
+.user-info {
   display: flex;
   align-items: center;
-  margin-bottom: 50px;
-}
-
-.profile-img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  margin-right: 15px;
-}
-
-.profile-name {
-  font-weight: bold;
-  font-size: 20px;
-}
-
-.image-btn {
-  margin-left: auto;
-  background-color: #4d8fff;
-  color: white;
-  border: none;
-  border-radius: 14px;
-  padding: 4px 10px;
-  font-size: 12px;
-}
-
-.form-group {
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-}
-
-.form-group label {
-  width: 110px;
-  font-weight: bold;
-}
-
-.form-group input {
-  border: 1px solid lightgray;
-  border-radius: 12px;
-  padding: 4px 12px;
-  margin-right: 10px;
-}
-
-.check-btn {
-  background-color: #4d8fff;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 4px 8px;
-  font-size: 12px;
-}
-
-.action-buttons {
-  display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin: var(--spacing-xxl) 0;
 }
 
-.cancel-btn,
-.edit-btn {
-  padding: 10px 24px;
-  border-radius: 20px;
-  font-weight: bold;
-  border: none;
-  margin: 0 10px;
+.user-avatar {
+  border-radius: 50%;
+  width: 11rem;
+  height: 11rem;
+  margin-right: var(--spacing-s);
+  object-fit: cover;
 }
 
-.cancel-btn {
-  background-color: #e0e0e0;
-}
-
-.edit-btn {
-  background-color: #4d8fff;
-  color: white;
-}
-
-/* 여행 정보 요약 */
-.travel-summary {
-  white-space: nowrap;
-  width: 50%;
-  padding: 60px;
-  font-size: 16px;
-}
-.travel-summary span{
-  text-indent: 4em;
-}
-.travel-summary .row {
+.user-details {
   display: flex;
-  justify-content: space-between;
-  white-space: nowrap;
-  text-indent: 2em;
-  margin-bottom: 10px;
+  flex-direction: column;
 }
 
-.travel-summary h3 {
-  color: #3f5efb;
+.user-details span {
+  line-height: 0.5;
+  font-size: 1.6rem; /* 1.0em -> 16px */
+  font-weight: bold;
+}
+
+/* ==============================================
+ * [4] 에디터 버튼
+ * ============================================== */
+.editor-button-container {
+  max-width: 120rem; 
+  margin: var(--spacing-xl) auto var(--spacing-m) auto; 
+  padding: 0 var(--spacing-xl); /* 양쪽 여백을 padding으로 처리 */
+  box-sizing: border-box; /* padding이 너비에 포함되도록 설정 */
+  text-align: right; 
+}
+
+.editor-button-container img {
+  width: 5rem;
+  height: auto;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.editor-button-container img:hover {
+  transform: scale(1.1);
+}
+
+/* ==============================================
+ * [5] 사진 갤러리 (CSS Grid로 변경)
+ * ============================================== */
+.photo-gallery {
+  display: grid;
+  /* 3개의 열을 만들고, 각 열은 동일한 너비를 가짐 */
+  grid-template-columns: repeat(3, 1fr);
+  /* 가로, 세로 간격을 변수로 관리 */
+  gap: var(--spacing-xl) var(--spacing-l);
+}
+
+.photo-item {
+  position: relative;
+  text-align: center;
+}
+
+.photo-item img {
+  display: block;
+  width: 100%;
+  border-radius: var(--border-radius-l);
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+}
+
+.photo-item p {
+  margin-top: var(--spacing-xs);
+  font-size: 2.2rem; /* 1.4em -> 22.4px, 약간 조정 */
+  font-weight: bold;
+  word-break: break-all;
+}
+
+.delete-photo-btn {
+  position: absolute;
+  top: var(--spacing-xs);
+  right: var(--spacing-xs);
+  z-index: 10;
+  background-color: var(--delete-bg-color);
+  color: var(--white-color);
+  border: none;
+  border-radius: 50%;
+  width: 2.4rem;
+  height: 2.4rem;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  text-align: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.photo-item:hover .delete-photo-btn {
+  opacity: 1;
+}
+
+/* ==============================================
+ * [6] 반응형 디자인 (모바일 화면 대응)
+ * ============================================== */
+@media (max-width: 1024px) {
+  .header {
+    padding: var(--spacing-l) var(--spacing-xl);
+  }
+  .photo-gallery {
+    /* 화면이 조금 작아지면 2열로 변경 */
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    padding: var(--spacing-l);
+    gap: var(--spacing-m);
+  }
+  .main-content {
+    margin: var(--spacing-l) auto;
+  }
+  .user-info {
+    margin: var(--spacing-xl) 0;
+  }
+  .photo-gallery {
+    /* 모바일 화면에서는 1열로 변경 */
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
