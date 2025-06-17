@@ -1,5 +1,3 @@
-// static/javascript/board.js
-
 document.addEventListener('DOMContentLoaded', function() {
     
     // --- 1. 제어할 요소들을 모두 가져옵니다 ---
@@ -8,12 +6,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const imageInput = document.getElementById('imageInput');
     const previewImage = document.getElementById('previewImage');
     const deleteImageButton = document.getElementById('deleteImage');
-    //  '/static' 경로가 포함되어야 할 수 있습니다. 실제 파일 위치를 확인하세요.
     const defaultIconPath = '/static/images/CAMERAICON.png'; 
 
     
     // --- 2. 이미지 미리보기 관련 기능 ---
-
     imageUploadWrapper.addEventListener('click', function(event) {
         if (event.target !== deleteImageButton) {
             imageInput.click();
@@ -81,7 +77,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // 성공적인 응답 처리 (예: 성공 메시지 후 페이지 이동)
-            alert('게시글이 성공적으로 작성되었습니다.');
             // 성공 후 이동할 페이지가 있다면 여기에 추가
             // window.location.href = '/board/list.html'; 
             return response.json(); // 성공 데이터를 다음 .then()으로 넘길 수 있음
@@ -91,3 +86,10 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('게시글 작성 중 오류 발생:', error);
             alert(error.detail || '게시글 작성 중 오류가 발생했습니다.');
         })
+        .finally(() => {
+            // 성공/실패 여부와 관계없이 버튼을 다시 활성화 시킵니다.
+            submitButton.disabled = false;
+            submitButton.textContent = 'Post';
+        }); 
+    }); 
+}); 
