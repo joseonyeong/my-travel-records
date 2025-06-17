@@ -27,7 +27,7 @@ district_name_map = {
     'Seongdong-gu': '성동구',
     'Songpa-gu': '송파구',
     'Yangcheon-gu': '양천구',
-    'Yeongdeungpo-gu_1_': '영등포구',
+    'Yeongdeungpo-gu': '영등포구',
     'Yongsan-gu': '용산구'
 }
 

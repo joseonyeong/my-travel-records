@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // static/javascript/board.js
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -9,28 +8,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const imageInput = document.getElementById('imageInput');
     const previewImage = document.getElementById('previewImage');
     const deleteImageButton = document.getElementById('deleteImage');
-    const defaultIconPath = '/images/CAMERAICON.png';
+    //  '/static' 경로가 포함되어야 할 수 있습니다. 실제 파일 위치를 확인하세요.
+    const defaultIconPath = '/static/images/CAMERAICON.png'; 
 
     
     // --- 2. 이미지 미리보기 관련 기능 ---
 
-    // 미리보기 영역을 클릭하면 숨겨진 파일 입력창을 엽니다.
     imageUploadWrapper.addEventListener('click', function(event) {
-        // 단, 삭제 버튼을 누른 경우는 제외합니다.
-=======
-// src/frontend/javascript/board.js
-
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // --- 이미지 미리보기 로직 (기존과 동일) ---
-    const imageInput = document.getElementById('imageInput');
-    const previewImage = document.getElementById('previewImage');
-    const deleteImageButton = document.getElementById('deleteImage');
-    const imageUploadWrapper = document.querySelector('.image-upload-wrapper');
-    const defaultIconPath = '/images/CAMERAICON.png';
-
-    imageUploadWrapper.addEventListener('click', function(event) {
->>>>>>> cf9fbed72d8dee31c7873cac7a87d16926c83297
         if (event.target !== deleteImageButton) {
             imageInput.click();
         }
@@ -43,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
             reader.onload = function(e) {
                 previewImage.src = e.target.result;
                 deleteImageButton.style.display = 'block';
-                // [추가] 미리보기 영역의 크기를 키우기 위해 'uploaded' 클래스를 추가합니다.
                 imageUploadWrapper.classList.add('uploaded');
             }
             reader.readAsDataURL(file);
@@ -54,14 +37,11 @@ document.addEventListener('DOMContentLoaded', function() {
         previewImage.src = defaultIconPath;
         imageInput.value = ''; 
         deleteImageButton.style.display = 'none';
-        // [추가] 미리보기 영역의 크기를 다시 줄이기 위해 'uploaded' 클래스를 제거합니다.
         imageUploadWrapper.classList.remove('uploaded');
     });
 
 
     // --- 3. 폼 제출 관련 기능 ---
-
-    // 'Post In' 버튼을 눌러 폼이 제출될 때의 동작입니다.
     boardForm.addEventListener('submit', function(event) {
         // 기본 폼 제출(새로고침) 동작을 막습니다.
         event.preventDefault();
@@ -73,83 +53,41 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // 폼 데이터를 FormData 객체로 만듭니다. (파일 포함)
         const formData = new FormData(boardForm);
 
-        // fetch API를 사용해 서버에 데이터를 비동기적으로 전송합니다.
+        // [개선] 버튼을 비활성화해서 중복 제출을 막습니다.
+        const submitButton = boardForm.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        submitButton.textContent = 'Posting...';
+
         fetch('/api/board/create', {
             method: 'POST',
             headers: {
-                // 헤더에 인증 토큰을 담아 보냅니다.
                 'Authorization': `Bearer ${token}`
-                // 'Content-Type'은 FormData 사용 시 브라우저가 자동으로 설정하므로 생략합니다.
             },
-            body: formData // 폼 데이터를 body에 담습니다.
+            body: formData
         })
         .then(response => {
             // 서버 응답이 리다이렉션일 경우, 해당 주소로 페이지를 이동시킵니다.
             if (response.redirected) {
                 window.location.href = response.url;
-            } else if (!response.ok) {
-                // 리다이렉션이 아니고, 응답이 실패(2xx 상태코드가 아님)했을 경우
-                // JSON 형태의 에러 메시지를 파싱해서 사용자에게 보여줍니다.
-                return response.json().then(data => {
-                    alert(data.detail || '게시글 작성에 실패했습니다.');
-                });
+                return; // 리다이렉션 후에는 더 이상 처리하지 않음
             }
+            
+            // 응답이 실패(2xx 상태코드가 아님)했을 경우
+            if (!response.ok) {
+                // JSON 형태의 에러 메시지를 파싱해서 Promise.reject로 에러를 넘깁니다.
+                return response.json().then(errorData => Promise.reject(errorData));
+            }
+            
+            // 성공적인 응답 처리 (예: 성공 메시지 후 페이지 이동)
+            alert('게시글이 성공적으로 작성되었습니다.');
+            // 성공 후 이동할 페이지가 있다면 여기에 추가
+            // window.location.href = '/board/list.html'; 
+            return response.json(); // 성공 데이터를 다음 .then()으로 넘길 수 있음
         })
         .catch(error => {
+            // Promise.reject로 넘어온 에러 또는 네트워크 에러를 여기서 처리합니다.
             console.error('게시글 작성 중 오류 발생:', error);
-            alert('게시글 작성 중 네트워크 오류가 발생했습니다.');
-        });
-    });
-
-    // --- (가장 중요) 폼 제출 처리 로직 추가 ---
-    const boardForm = document.getElementById('board-form');
-
-    boardForm.addEventListener('submit', function(event) {
-        // 1. 폼의 기본 제출 동작(페이지 새로고침)을 막습니다.
-        event.preventDefault();
-
-        // 2. localStorage에서 토큰을 가져옵니다.
-        const token = localStorage.getItem('access_token');
-        if (!token) {
-            alert('로그인이 필요합니다.');
-            window.location.href = '/login.html';
-            return;
-        }
-
-        // 3. 폼 데이터를 FormData 객체로 만듭니다.
-        const formData = new FormData(boardForm);
-
-        // 4. fetch를 사용해 서버에 데이터를 전송합니다.
-        fetch('/api/board/create', {
-            method: 'POST',
-            headers: {
-                // 5. Authorization 헤더에 토큰을 담아 보냅니다.
-                'Authorization': `Bearer ${token}`
-            },
-            body: formData // 폼 데이터를 body에 담습니다.
+            alert(error.detail || '게시글 작성 중 오류가 발생했습니다.');
         })
-        .then(response => {
-            // 서버의 응답이 리다이렉트(페이지 이동) 응답이면
-            if (response.redirected) {
-                // 해당 URL로 페이지를 이동시킵니다.
-                window.location.href = response.url;
-            } else {
-                // 다른 응답이 오면 JSON으로 파싱합니다.
-                return response.json();
-            }
-        })
-        .then(data => {
-            if (data) {
-                // 만약 에러 메시지가 있다면 표시합니다.
-                alert(data.detail || '알 수 없는 오류가 발생했습니다.');
-            }
-        })
-        .catch(error => {
-            console.error('게시글 작성 중 오류 발생:', error);
-            alert('게시글 작성에 실패했습니다.');
-        });
-    });
-});
