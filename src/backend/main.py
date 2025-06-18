@@ -41,11 +41,8 @@ img_dir = os.path.join(frontend_dir, "images")
 # 정적 파일 mount
 app.mount("/static/css", StaticFiles(directory=css_dir), name="css")
 app.mount("/static/javascript", StaticFiles(directory=js_dir), name="javascript")
-<<<<<<< HEAD
 app.mount("/static/images", StaticFiles(directory=img_dir), name="images")
-=======
-app.mount("/uploads", StaticFiles(directory=uploads_dir), name="uploads") # 이미지 로컬 저장소 
->>>>>>> yunsanghyeon2
+
 
 @app.get("/")
 async def serve_index():
