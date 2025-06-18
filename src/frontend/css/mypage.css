@@ -198,3 +198,19 @@ body {
     word-break: break-all;
 }
 /* 사진 아이템 영역 끝 */
+
+.editor-button-container {
+    /* 기존 스타일과 조절하여 사용하세요 */
+    text-align: right;
+    padding: 0 20px;
+}
+
+.edit-btn i {
+    font-size: 24px; /* 아이콘 크기 */
+    color: #333;    /* 아이콘 색상 */
+    transition: color 0.3s ease;
+}
+
+.edit-btn:hover i {
+    color: #007bff; /* 마우스를 올렸을 때 색상 */
+}
