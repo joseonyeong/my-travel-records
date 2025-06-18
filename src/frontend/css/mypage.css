@@ -1,0 +1,216 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Helvetica', sans-serif;
+    background-color: white;
+    position: relative;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 100px;
+    border-bottom: 1px solid #eee;
+}
+
+.logo img {
+    width: 63px;
+    height: 30px;
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.1);
+}
+
+.nav {
+    display: flex;
+    gap: 16px;
+}
+
+.nav a {
+    text-decoration: none;
+    font-size: 16px;
+    font-family: inherit;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: transparent;
+    color: #3b82f6;
+    border: 1px solid transparent;
+}
+
+.nav a.active {
+    background-color: #3b5fbf;
+    color: white;
+}
+
+.nav a:hover {
+    color: #000;
+}
+
+/* MyPage 링크 버튼 스타일 끝 */
+
+
+/* 메인 콘텐츠 영역 시작 */
+.main-content {
+    max-width: 1200px ;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+/* 메인 콘텐츠 영역 끝 */
+
+/* 유저 프로필 영역 시작 */
+/* 기능: 유저 프로필 전체 컨테이너 레이아웃 */
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 90px 0;
+}
+
+/* 기능: 유저 프로필 이미지 설정 */
+.user-avatar {
+    border-radius: 50%;
+    width: 110px;
+    height: 110px;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+/* 기능: 유저 이름과 기록 수를 담는 컨테이너 */
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 기능: 유저 이름, 기록 수 텍스트 스타일 */
+.user-details span {
+    line-height: 0.5;
+    font-size: 1.0em;
+    font-weight: bold;
+}
+/* 유저 프로필 영역 끝 */
+
+/* 👇👇👇 에디터 버튼 스타일 시작 👇👇👇 */
+.editor-button-container {
+    width: calc(100% - 80px);
+    max-width: 1200px; 
+    margin: 40px auto 15px auto; 
+    text-align: right; 
+}
+
+/* 기능: 에디터 버튼 이미지 스타일 */
+.editor-button-container img {
+    width: 50px; /* 에디터 아이콘 이미지 크기 */
+    height: auto; /* 비율 유지 */
+    transition: transform 0.3s ease; /* 호버 시 부드럽게 */
+    cursor: pointer; /* 마우스 커서가 손가락 모양으로 바뀌게 */
+}
+
+/* 기능: 에디터 버튼 이미지 호버 시 스타일 */
+.editor-button-container img:hover {
+    transform: scale(1.1); /* 호버 시 살짝 커지게 */
+}
+
+
+
+/* 사진 갤러리 컨테이너 시작 */
+.photo-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 10px;
+    row-gap: 20px; /*세로 간격*/
+    column-gap: 40px; /*가로 간격*/
+}
+/* 사진 갤러리 컨테이너 끝 */
+
+
+/* 사진 아이템 영역 시작 */
+/* 기능: 각 사진 아이템 컨테이너 너비 및 정렬 */
+.photo-item {
+    /* column-gap 40px 고려한 너비 계산 */
+    width: calc((100% - 80px) / 3);
+    text-align: center;
+    box-sizing: border-box;
+    position: relative; /* 자식 요소인 버튼을 position: absolute로 배치하기 위함 */
+    display: inline-block; /* 또는 grid, flex의 아이템 */
+    margin: 5px;
+}
+
+/* 기능: 사진 아이템 안의 이미지 스타일 */
+.photo-item img {
+    display: block; /* 이미지 아래 불필요한 여백 제거 */
+    width: 100%;
+    height: auto;
+    border-radius: 28px;
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+}
+
+/* 삭제 버튼 (X) */
+.delete-photo-btn {
+    position: absolute; /* 부모(.photo-item) 기준으로 위치 설정 */
+    top: 5px;
+    right: 5px;
+    z-index: 10; /* 이미지가 버튼을 가리지 않도록 설정 */
+    
+    /* 버튼 스타일 */
+    background-color: rgba(0, 0, 0, 0.5); /* 반투명 검정 배경 */
+    color: white;
+    border: none;
+    border-radius: 50%; /* 동그란 모양 */
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+    line-height: 24px; /* 텍스트(×) 수직 중앙 정렬 */
+    text-align: center;
+    cursor: pointer;
+    opacity: 0; /* 평소에는 숨김 */
+    transition: opacity 0.2s ease-in-out;
+}
+
+/* 사진 아이템에 마우스를 올렸을 때 삭제 버튼 표시 */
+.photo-item:hover .delete-photo-btn {
+    opacity: 1;
+}
+
+/* 기능: 사진 아이템 안의 설명 텍스트 스타일 */
+.photo-item p {
+    margin-top: 5px;
+    font-size: 1.4em;
+    font-weight: bold;
+    word-break: break-all;
+}
+/* 사진 아이템 영역 끝 */
+
+.editor-button-container {
+    /* 기존 스타일과 조절하여 사용하세요 */
+    text-align: right;
+    padding: 0 20px;
+}
+
+.edit-btn i {
+    font-size: 24px; /* 아이콘 크기 */
+    color: #333;    /* 아이콘 색상 */
+    transition: color 0.3s ease;
+}
+
+.edit-btn:hover i {
+    color: #007bff; /* 마우스를 올렸을 때 색상 */
+}
