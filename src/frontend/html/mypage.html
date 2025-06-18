@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>나의 여행 기록</title>
+    <link rel="stylesheet" href="/static/css/mypage.css" >
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="/main.html">
+                <img src="./public/images/logo.png" alt="로고" />
+            </a>
+        </div>
+        <nav class="nav">
+            <a href="/map.html" class="nav-btn">Map</a>
+            <a href="mypage.html" class="nav-btn active">MyPage</a>
+            <a href="/logout" class="nav-btn">Logout</a>
+        </nav>
+    </header>
+
+    <div class="user-info">
+        <img src="/images/profile_ex.jpg" alt="사용자 프로필" class="user-avatar" id="user-avatar" />
+        <div class="user-details">
+            <span id="user-nickname" style="font-size: 30px;"></span><br />
+            <span>
+                My travel records
+                <b id="post-count" style="font-size: 30px;"></b>
+            </span>
+        </div>
+    </div>
+
+    <div class="editor-button-container">
+        <a href="mypage_edit.html"><img src="/images/Edit.png" alt="에디트 버튼"></a>
+    </div>
+
+    <main class="main-content">
+        <section class="photo-gallery" id="photo-gallery">
+            </section>
+    </main>
+
+    <script src="/static/javascript/mypage.js"></script>
+</body>
+</html>

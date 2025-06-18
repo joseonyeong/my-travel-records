@@ -8,6 +8,7 @@ from starlette.middleware.cors import CORSMiddleware
 from domain.board import board_router
 from domain.user import user_router
 from domain.map import districts
+from domain.mypage import mypage_router
 from dotenv import load_dotenv
 
 
@@ -26,15 +27,20 @@ app.add_middleware(
 )
 
 # 경로 설정
+
 base_dir = os.path.dirname(__file__)  # src/backend
 frontend_dir = os.path.abspath(os.path.join(base_dir, "..", "frontend"))
+uploads_dir  = os.path.abspath(os.path.join(base_dir, "..", "uploads"))# 이미지 로컬 저장소 
 html_dir = os.path.join(frontend_dir, "html")
 css_dir = os.path.join(frontend_dir, "css")
 js_dir = os.path.join(frontend_dir, "javascript")
 
+
+
 # 정적 파일 mount
 app.mount("/static/css", StaticFiles(directory=css_dir), name="css")
 app.mount("/static/javascript", StaticFiles(directory=js_dir), name="javascript")
+app.mount("/uploads", StaticFiles(directory=uploads_dir), name="uploads") # 이미지 로컬 저장소 
 
 @app.get("/")
 async def serve_index():
@@ -47,4 +53,5 @@ async def serve_html(filename: str):
 # API 라우터
 app.include_router(user_router.router)
 app.include_router(districts.router) 
-app.include_router(board_router.router) 
+app.include_router(board_router.router)
+app.include_router(mypage_router.router)
