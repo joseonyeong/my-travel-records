@@ -1,6 +1,6 @@
 // + 버튼 이벤트
 document.getElementById("plusBtn").addEventListener("click", function () {
-  window.location.href = "../html/board.html";
+  window.location.href = "/board.html";
 });
 
 // 지도 SVG 생성 및 클릭 이벤트

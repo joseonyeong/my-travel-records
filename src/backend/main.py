@@ -5,9 +5,11 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.cors import CORSMiddleware
 
+from domain.board import board_router
 from domain.user import user_router
 from domain.map import districts
 from dotenv import load_dotenv
+
 
 app = FastAPI()
 load_dotenv()
@@ -44,4 +46,5 @@ async def serve_html(filename: str):
 
 # API 라우터
 app.include_router(user_router.router)
-app.include_router(districts.router)
+app.include_router(districts.router) 
+app.include_router(board_router.router) 

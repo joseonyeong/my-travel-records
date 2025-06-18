@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>New Travel Board</title>
+  <link rel="stylesheet" href="/static/css/board.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+</head>
+<body>
+  <form id="board-form" class="form-container" method="POST" action="/api/board/create" enctype="multipart/form-data">
+    <div class="form-title">
+      <img src="/images/profile_ex.jpg" alt="user" />
+      Travel Board
+    </div>
+    <div class="form-field">
+      <div class="image-upload-wrapper">
+        <i class="fa-solid fa-camera"></i>
+        <img id="previewImage" src="" alt="Preview" class="is-hidden" />
+        <button type="button" id="deleteImage" class="delete-button">×</button>
+        <input type="file" id="imageInput" name="image" accept="image/*" style="display: none;" required />
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label for="title"></label>
+      <input type="text" id="title" name="title" placeholder="My travel is .." required />
+    </div>
+
+    <hr class="divider" />
+    <div class="form-field">
+      <div class="input-with-icon">
+        <i class="fa-solid fa-location-dot input-icon"></i>
+        <input type="text" id="location" name="location" placeholder="Location" />
+      </div>
+    </div>
+
+    <div class="form-field">
+      <div class="input-with-icon">
+        <label for="date"></label>
+        <i class="fa-solid fa-calendar-days input-icon"></i>
+        <input
+          type="text"
+          id="date"
+          name="date"
+          placeholder="Date"
+          onfocus="(this.type='date')"
+          onblur="if(!this.value) this.type='text'"
+        />
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button type="button" onclick="window.history.back()" class="cancel-btn">Cancel</button>
+      <button type="submit" class="submit-btn">Post In</button>
+    </div>
+  </form>
+
+  <script src="/static/javascript/board.js"></script>
+</body>
+</html>
