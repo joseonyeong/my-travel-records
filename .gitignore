@@ -175,3 +175,7 @@ cython_debug/
 .idea/
 .vscode/
 src/backend/migrations/
+
+.bash_profile
+profile_ex.png
+.gitignore
