@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>나의 여행 기록 - MyPage - Edit</title> 
+  <link rel="stylesheet" href="/static/css/mypage_edit.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <a href="/main.html">
+        <img src="/public/images/logo.png" alt="로고" />
+      </a>
+    </div>
+    <nav class="nav">
+      <a href="/map.html" class="nav-button">Map</a>
+      <a href="/mypage.html" class="nav-button">MyPage</a>
+      <a href="#" id="logout-btn" class="nav-btn">Logout</a>
+    </nav>
+  </header>
+
+  <main class="mypage-container">
+    <section class="profile-box">
+      <div class="profile-header">
+        <label for="profile-image-upload" class="profile-img-label">
+          <img src="/public/images/profile_ex.png" alt="Profile" class="profile-img" id="profile-img" />
+        </label>
+        <input type="file" id="profile-image-upload" accept="image/*" style="display: none;" />
+        <div id="profile-name" class="profile-name">사용자 이름</div>
+      </div>
+
+      <div class="form-group">
+        <label for="nickname">User ID:</label>
+        <input type="text" id="nickname" />
+        <button class="check-btn">Check</button>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" placeholder="새 비밀번호 입력 시에만 작성" id="password" />
+      </div>
+
+      <div class="form-group">
+        <label for="birth-date">Birth Date:</label>
+        <input type="date" id="birth-date" />
+      </div>
+
+      <div class="form-group">
+        <label for="register-date">Register Date:</label>
+        <input type="text" disabled id="register-date" />
+      </div>
+
+      <div class="action-buttons">
+        <button class="cancel-btn">Cancel</button>
+        <button class="edit-btn">Save</button>
+      </div>
+    </section>
+
+    <section class="travel-summary">
+      <h3>My Travel is ...</h3>
+      <div class="row">
+        <span>My Travel records:</span>
+        <strong id="post-count">0</strong>
+      </div>
+      <div class="row">
+        <span>My Travel locations:</span>
+        <strong id="location-count">0 / 25</strong>
+      </div>
+    </section>
+  </main>
+  
+  <script src="/static/javascript/mypage_edit.js"></script>
+</body>
+</html>
