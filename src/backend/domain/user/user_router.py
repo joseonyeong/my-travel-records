@@ -1,3 +1,4 @@
+import os
 from fastapi import APIRouter, HTTPException, Depends, status
 from fastapi.security import OAuth2PasswordRequestForm
 
@@ -7,13 +8,16 @@ from database import get_db
 from domain.user import user_crud, user_schema
 from domain.user.user_auth import create_access_token, get_current_user
 from domain.user.user_crud import pwd_context
+from dotenv import load_dotenv
+
+load_dotenv()
 
 router = APIRouter(
     prefix="/api/user",
 )
 
-ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24
-SECRET_KEY = "4ab2fce7a6bd79e1c014396315ed322dd6edb1c5d975c6b74a2904135172c03c"
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 1440))
+SECRET_KEY = os.getenv("SECRET_KEY", "")
 ALGORITHM = "HS256"
 
 
