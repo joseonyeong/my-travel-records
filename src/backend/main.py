@@ -40,25 +40,13 @@ html_dir = os.path.join(frontend_dir, "html")
 css_dir = os.path.join(frontend_dir, "css")
 js_dir = os.path.join(frontend_dir, "javascript")
 img_dir = os.path.join(frontend_dir, "images")
-<<<<<<< HEAD
-
-=======
->>>>>>> 109933e9725ecc9b814120645e87c80d20ba9d97
 
 
 # 정적 파일 mount
 app.mount("/static/css", StaticFiles(directory=css_dir), name="css")
 app.mount("/static/javascript", StaticFiles(directory=js_dir), name="javascript")
-<<<<<<< HEAD
-<<<<<<< HEAD
 app.mount("/static/images", StaticFiles(directory=img_dir), name="images")
-=======
 app.mount("/uploads", StaticFiles(directory=uploads_dir), name="uploads") # 이미지 로컬 저장소 
->>>>>>> yunsanghyeon2
-=======
-app.mount("/uploads", StaticFiles(directory=uploads_dir), name="uploads") 
-app.mount("/public", StaticFiles(directory=public_dir), name="public")
->>>>>>> 109933e9725ecc9b814120645e87c80d20ba9d97
 
 @app.get("/")
 async def serve_index():
