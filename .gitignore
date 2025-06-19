@@ -172,7 +172,6 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
-<<<<<<< HEAD
 .idea/
 .vscode/
 src/backend/migrations/
@@ -180,8 +179,3 @@ src/backend/migrations/
 .bash_profile
 profile_ex.png
 .gitignore
-=======
-
-.bash_profile
-profile_ex.png
->>>>>>> yunsanghyeon2
