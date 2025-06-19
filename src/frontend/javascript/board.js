@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const cancelbtn = document.querySelector('.cancel-btn');
+    if(cancelbtn){
+        cancelbtn.addEventListener("click", () => {
+            window.location.href="/map.html";
+        })
+    }
+
     
     // --- 1. 제어할 요소들을 모두 가져옵니다 ---
     const boardForm = document.getElementById('board-form');
