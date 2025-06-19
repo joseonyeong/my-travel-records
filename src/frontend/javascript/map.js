@@ -1,9 +1,9 @@
-// + 버튼 이벤트
+// + 버튼 → 게시글 작성 페이지로 이동
 document.getElementById("plusBtn").addEventListener("click", function () {
   window.location.href = "/board.html";
 });
 
-// 지도 SVG 생성 및 클릭 이벤트
+// 지도 SVG 삽입
 const mapContainer = document.getElementById('mapContainer');
 
 fetch('/api/districts')
@@ -14,8 +14,6 @@ fetch('/api/districts')
 
     svg.setAttribute("viewBox", "0 0 1500 1500");
     svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
-    svg.style.width = "100%";
-    svg.style.height = "100%";
 
     data.forEach(item => {
       const path = document.createElementNS(svgNS, "path");
@@ -38,11 +36,11 @@ fetch('/api/districts')
           })
           .then(images => {
             const imgUrls = images.map(img => img.img_url);
-            openPopup(item.display_name, imgUrls);
+            updateViewer(item.display_name, imgUrls);
           })
           .catch(err => {
             console.error(err);
-            openPopup(item.display_name, []);
+            updateViewer(item.display_name, []);
           });
       });
 
@@ -70,24 +68,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// 팝업 관련 함수
+// 이미지 뷰어 로직
 let currentImages = [];
 let currentIndex = 0;
 
-function openPopup(districtName, images) {
+function updateViewer(districtName, images) {
   currentImages = images;
   currentIndex = 0;
   document.getElementById('districtName').innerText = districtName;
   updateImage();
-  document.getElementById('popup').style.display = 'block';
-}
-
-function closePopup() {
-  document.getElementById('popup').style.display = 'none';
 }
 
 function updateImage() {
-  const imgEl = document.getElementById('popupImage');
+  const imgEl = document.getElementById('viewerImage');
   if (currentImages.length > 0) {
     imgEl.src = currentImages[currentIndex];
     imgEl.alt = '구 이미지';
