@@ -19,3 +19,8 @@ class UserProfile(BaseModel):
 
     class Config:
         from_attributes = True
+
+# 통계 API의 응답 형식을 정의하는 스키마
+class UserStatsResponse(BaseModel):
+    post_count: int
+    visited_districts_count: int
