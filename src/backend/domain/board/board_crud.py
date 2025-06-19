@@ -37,3 +37,18 @@ def get_board(db: Session, board_id: int):
 def delete_board(db: Session, board: Board):
     db.delete(board)
     db.commit()
+
+
+# 사용자의 전체 게시글 수를 세는 함수
+def count_user_boards(db: Session, user_num: int) -> int:
+    # Board 테이블에서 user_num이 일치하는 레코드의 개수를 센다.
+    return db.query(Board).filter(Board.user_num == user_num).count()
+
+# 사용자가 방문한 (게시글을 작성한) 고유한 구의 개수를 세는 함수
+from sqlalchemy import func, distinct # func와 distinct를 사용하려면 임포트 필요
+
+def count_unique_user_districts(db: Session, user_num: int) -> int:
+    # Board 테이블에서 user_num이 일치하는 레코드 중
+    # district_code 컬럼의 중복을 제거한 개수를 센다.
+    return db.query(func.count(distinct(Board.district_code))).filter(Board.user_num == user_num).scalar()
+
