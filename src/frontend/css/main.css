@@ -4,7 +4,7 @@ body {
     font-family: 'Helvetica', sans-serif;
     background-color: white;
     position: relative;
-    overflow: hidden;
+    overflow: scroll;
     animation: fadeIn 0.5s ease-in;
 }
 
@@ -21,13 +21,21 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 100px;
-    border-bottom: 1px solid #eee;
+    padding-top: 40px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    height: 100px;
+}
+
+.logo {
+    width: 10%;
+
 }
 
 .logo img {
-    width: 63px;
-    height: 30px;
+    width: 100%;
+    height: 100%;
     transition: transform 0.3s ease;
 }
 
@@ -42,7 +50,7 @@ body {
 
 .nav a {
     text-decoration: none;
-    font-size: 16px;
+    font-size: 20px;
     font-family: inherit;
     font-weight: bold;
     padding: 8px 16px;
@@ -63,18 +71,18 @@ body {
     color: #000;
 }
 
-/*main-content 사진 작업 후 수정 예정*/
 .main-content {
-    max-width: 900px;
-    margin: 100px auto;
+    max-width: 90%;
+    margin: 200px auto;
     padding: 0 20px;
     text-align: center;
 }
 
 .intro-text h1 {
-    font-size: 5rem;
+    font-size: 6rem;
     font-weight: bold;
     margin-bottom: 10px;
+    text-shadow: 1px 1px #555;
 }
 
 .intro-text .highlight {
@@ -88,6 +96,13 @@ body {
 }
 
 .usage {
+    margin: 200px auto;
+    padding: 0 20px;
+    text-align: center;
+
+    justify-content: center;
     margin-top: 100px;
-    /* 추후 사용 방법 섹션 스타일링 */
+    height: 100%;
+    width: 100%;
+    border: 2px solid #3b5fbf;
 }
