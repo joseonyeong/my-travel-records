@@ -22,22 +22,25 @@
   </header>
 
   <main class="main-container">
-    <div class="map-section" id="mapContainer">
-    </div>
+    <div class="map-section" id="mapContainer"></div>
+
     <div class="viewer-section">
       <div class="phone-frame">
-        <div class="phone-header">phone</div>
+        <div class="phone-camera"></div>
+
         <div class="image-viewer">
           <button class="arrow" onclick="prevImage()">←</button>
           <img id="viewerImage" src="" alt="게시물을 작성해 이미지를 넣어보세요." />
           <button class="arrow" onclick="nextImage()">→</button>
         </div>
+
         <div class="district-name" id="districtName"></div>
+
+        <button class="home-button"></button>
       </div>
     </div>
   </main>
-
-  <button class="floating-btn" id="plusBtn">+</button>
+  
   <script src="/static/javascript/map.js"></script>
 </body>
 </html>
