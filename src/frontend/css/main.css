@@ -96,13 +96,20 @@ body {
 }
 
 .usage {
-    margin: 200px auto;
     padding: 0 20px;
     text-align: center;
-
     justify-content: center;
-    margin-top: 100px;
     height: 100%;
     width: 100%;
-    border: 2px solid #3b5fbf;
 }
+
+.usage h3 {
+    margin-top: inherit;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.usage .highlight {
+    color: #3b82f6;
+}   
