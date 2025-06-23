@@ -3,6 +3,8 @@ from sqlalchemy import func, distinct  # ✨ 1. sqlalchemy에서 func, distinct�
 from models import User, Board         # ✨ 2. models에서 Board를 추가로 가져옵니다.
 from domain.mypage.mypage_schema import ProfileUpdate
 from passlib.context import CryptContext
+from fastapi import HTTPException, status
+from domain.user import user_crud 
 
 # 비밀번호 해싱을 위한 설정
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

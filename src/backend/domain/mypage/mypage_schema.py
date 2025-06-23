@@ -3,6 +3,7 @@ from datetime import date, datetime
 
 # 사용자 정보 수정을 위해 입력받는 데이터의 규칙
 class ProfileUpdate(BaseModel):
+    id: str | None = None
     nickname: str | None = None
     pw: str | None = None
     birth: date | None = None
