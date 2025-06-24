@@ -1,3 +1,4 @@
+<img src="https://github.com/user-attachments/assets/93841a8b-8390-4221-9fd4-c4c0706e8244" width="742" height="279"/>
 # 나의 여행 기록 (My Travel Records)
 
 ## 서비스 소개 
@@ -52,7 +53,7 @@
 <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&amp;logo=mysql&amp;logoColor=white"/>
 
 ### ☁️ Server : 
-<img src="https://img.shields.io/badge/Google_Cloud-4285F4?style=for-the-badge&amp;logo=google-cloud&amp;logoColor=white"/>
+<img src="https://img.shields.io/badge/Google_Cloud-4285F4?style=for-the-badge&amp;logo=GCP&amp;logoColor=white"/>
 
 ### 🧰 ETC : 
 <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&amp;logo=github&amp;logoColor=white"/> <img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&amp;logo=discord&amp;logoColor=white"/>
