@@ -28,7 +28,7 @@ app.add_middleware(
 # 경로 설정
 base_dir = os.path.dirname(__file__)  # src/backend
 frontend_dir = os.path.abspath(os.path.join(base_dir, "..", "frontend"))
-uploads_dir  = "/home/sebin/uploads"
+
 html_dir = os.path.join(frontend_dir, "html")
 css_dir = os.path.join(frontend_dir, "css")
 js_dir = os.path.join(frontend_dir, "javascript")
@@ -38,7 +38,6 @@ img_dir = os.path.join(frontend_dir, "images")
 app.mount("/static/css", StaticFiles(directory=css_dir), name="css")
 app.mount("/static/javascript", StaticFiles(directory=js_dir), name="javascript")
 app.mount("/static/images", StaticFiles(directory=img_dir), name="images")
-app.mount("/static/uploads", StaticFiles(directory=uploads_dir), name="uploads")
 
 @app.get("/")
 async def serve_index():

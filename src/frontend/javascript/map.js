@@ -38,14 +38,31 @@ fetch('/api/districts')
       path.appendChild(title);
 
       path.addEventListener("click", () => {
-        fetch(`/api/districts/${item.id}/image`)
-          .then(res => {
-            if (!res.ok) throw new Error("이미지를 불러올 수 없습니다.");
-            return res.json();
-          })
-          .then(images => {
-            const imgUrls = images.map(img => img.img_url);
-            updateViewer(item.display_name, imgUrls);
+        const token = localStorage.getItem("access_token");
+
+        const allImagesPromise = fetch(`/api/districts/${item.id}/images`, {
+          method: "GET",
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
+        }).then(res => res.ok ? res.json() : []);
+
+        const latestImagePromise = fetch(`/api/districts/${item.id}/image`, {
+          method: "GET",
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
+        }).then(res => res.ok ? res.json() : []);
+
+        Promise.all([allImagesPromise, latestImagePromise])
+          .then(([allImages, latestImages]) => {
+            const allImgUrls = allImages.map(img => img.img_url);
+            const latestImgUrls = latestImages.map(img => img.img_url);
+
+            // 중복 제거 및 최신 이미지 먼저 보여주기
+            const combined = [...new Set([...latestImgUrls, ...allImgUrls])];
+
+            updateViewer(item.display_name, combined);
           })
           .catch(err => {
             console.error("이미지 요청 실패:", err);
@@ -65,24 +82,33 @@ fetch('/api/districts')
   });
 
 // 이미지 뷰어 로직
-let currentImages = [];
+let currentImages = []; // 이미지 배열
 let currentIndex = 0;
 
 function updateViewer(districtName, images) {
   currentImages = images;
   currentIndex = 0;
+
   document.getElementById('districtName').innerText = districtName;
   updateImage();
 }
 
 function updateImage() {
   const imgEl = document.getElementById('viewerImage');
+  const titleEl = document.getElementById('viewerTitle');
+  const dateEl = document.getElementById('viewerDate');
+
   if (currentImages.length > 0) {
-    imgEl.src = currentImages[currentIndex];
-    imgEl.alt = '구 이미지';
+    const image = currentImages[currentIndex];
+    imgEl.src = image.img_url;
+    imgEl.alt = image.title || '게시글 이미지';
+    titleEl.innerText = image.title || '제목 없음';
+    dateEl.innerText = new Date(image.writer_date).toLocaleString();
   } else {
     imgEl.src = '';
-    imgEl.alt = '게시글을 작성해 사진을 넣어보세요';
+    imgEl.alt = '이미지가 없습니다';
+    titleEl.innerText = '';
+    dateEl.innerText = '';
   }
 }
 
@@ -111,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 홈버튼 클릭 → 게시글 작성
+  // 홈버튼 → 글쓰기 페이지 이동
   const homeBtn = document.querySelector('.home-button');
   if (homeBtn) {
     homeBtn.addEventListener("click", () => {
@@ -119,4 +145,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-
