@@ -5,7 +5,7 @@
   <title>New Travel Board</title>
   <link rel="stylesheet" href="/static/css/board.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-
+  <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
 </head>
 <body>
   <form id="board-form" class="form-container" method="POST" action="/api/board/create" enctype="multipart/form-data">
@@ -29,9 +29,15 @@
 
     <hr class="divider" />
     <div class="form-field">
-      <div class="input-with-icon">
+      <div class="input-with-icon select-wrapper">
         <i class="fa-solid fa-location-dot input-icon"></i>
-        <input type="text" id="location" name="location" placeholder="Location" />
+        <select id="location" name="location" required>
+            <option value="" disabled selected>Location</option>
+        </select>
+      </div>
+      <!-- [수정] 상태 메시지를 별도의 div로 분리합니다. -->
+      <div class="status-message-wrapper">
+        <span id="location-status"></span>
       </div>
     </div>
 
@@ -44,8 +50,6 @@
           id="date"
           name="date"
           placeholder="Date"
-          onfocus="(this.type='date')"
-          onblur="if(!this.value) this.type='text'"
         />
       </div>
     </div>
