@@ -28,7 +28,6 @@ app.add_middleware(
 # 경로 설정
 base_dir = os.path.dirname(__file__)  # src/backend
 frontend_dir = os.path.abspath(os.path.join(base_dir, "..", "frontend"))
-uploads_dir  = "/home/sebin/uploads"
 html_dir = os.path.join(frontend_dir, "html")
 css_dir = os.path.join(frontend_dir, "css")
 js_dir = os.path.join(frontend_dir, "javascript")
@@ -38,7 +37,6 @@ img_dir = os.path.join(frontend_dir, "images")
 app.mount("/static/css", StaticFiles(directory=css_dir), name="css")
 app.mount("/static/javascript", StaticFiles(directory=js_dir), name="javascript")
 app.mount("/static/images", StaticFiles(directory=img_dir), name="images")
-app.mount("/static/uploads", StaticFiles(directory=uploads_dir), name="uploads")
 
 @app.get("/")
 async def serve_index():
@@ -47,23 +45,6 @@ async def serve_index():
 @app.get("/{filename}.html")
 async def serve_html(filename: str):
     return FileResponse(os.path.join(html_dir, f"{filename}.html"))
-
-@app.post("/upload/{user_num}")
-async def upload_image(user_id: int, file: UploadFile = File(...)):
-    user_dir = os.path.join(uploads_dir, f"user_{user_id}")
-    os.makedirs(user_dir, exist_ok=True)
-
-    # 저장 경로
-    save_path = os.path.join(user_dir, file.filename)
-
-    # 파일 저장
-    with open(save_path, "wb") as buffer:
-        buffer.write(await file.read())
-
-    # 접근 URL (정적 mount 기준)
-    public_url = f"/static/uploads/user_{user_id}/{file.filename}"
-    return {"image_url": public_url}
-
 
 # API 라우터
 app.include_router(user_router.router)
