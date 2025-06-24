@@ -12,11 +12,49 @@ from domain.mypage import mypage_router
 from dotenv import load_dotenv
 
 
+
+# app = FastAPI()
+# load_dotenv()
+
+# origins = [os.getenv("FRONTEND_ORIGIN")]
+
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=origins,
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
+
+# # --- ✨ 경로 설정 부분을 아래 내용으로 수정/교체해주세요 ✨ ---
+
+# # 경로 설정의 기준점을 프로젝트 최상위 폴더로 잡습니다.
+# base_dir = os.path.dirname(__file__)  # src/backend
+# # project_root = os.path.abspath(os.path.join(base_dir, "..", ".."))
+
+# # # 모든 경로를 project_root 기준으로 재설정합니다.
+# # frontend_dir = os.path.join(project_root, "src", "frontend")
+# # # uploads_dir  = os.path.join(project_root, "uploads") # ✨ 'src' 밖의 uploads 폴더를 가리키도록 수정
+# # # public_dir = os.path.join(project_root, "public")
+
+# # html_dir = os.path.join(frontend_dir, "html")
+# # css_dir = os.path.join(frontend_dir, "css")
+# # js_dir = os.path.join(frontend_dir, "javascript")
+# # img_dir = os.path.join(frontend_dir, "images")
+
+
+# # 정적 파일 mount
+# app.mount("/static/css", StaticFiles(directory=css_dir), name="css")
+# app.mount("/static/javascript", StaticFiles(directory=js_dir), name="javascript")
+# app.mount("/static/images", StaticFiles(directory=img_dir), name="images")
+# #app.mount("/uploads", StaticFiles(directory=uploads_dir), name="uploads") # 이미지 로컬 저장소    변경 예정으로 임시 주석처리  
+
 app = FastAPI()
 load_dotenv()
 
 origins = [os.getenv("FRONTEND_ORIGIN")]
 
+# JS에서 fetch로 API 요청할 때 필요함
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -25,28 +63,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# --- ✨ 경로 설정 부분을 아래 내용으로 수정/교체해주세요 ✨ ---
-
-# 경로 설정의 기준점을 프로젝트 최상위 폴더로 잡습니다.
+# 경로 설정
 base_dir = os.path.dirname(__file__)  # src/backend
-project_root = os.path.abspath(os.path.join(base_dir, "..", ".."))
-
-# 모든 경로를 project_root 기준으로 재설정합니다.
-frontend_dir = os.path.join(project_root, "src", "frontend")
-uploads_dir  = os.path.join(project_root, "uploads") # ✨ 'src' 밖의 uploads 폴더를 가리키도록 수정
-public_dir = os.path.join(project_root, "public")
-
+frontend_dir = os.path.abspath(os.path.join(base_dir, "..", "frontend"))
 html_dir = os.path.join(frontend_dir, "html")
 css_dir = os.path.join(frontend_dir, "css")
 js_dir = os.path.join(frontend_dir, "javascript")
 img_dir = os.path.join(frontend_dir, "images")
 
-
 # 정적 파일 mount
 app.mount("/static/css", StaticFiles(directory=css_dir), name="css")
 app.mount("/static/javascript", StaticFiles(directory=js_dir), name="javascript")
 app.mount("/static/images", StaticFiles(directory=img_dir), name="images")
-#app.mount("/uploads", StaticFiles(directory=uploads_dir), name="uploads") # 이미지 로컬 저장소    변경 예정으로 임시 주석처리  
 
 @app.get("/")
 async def serve_index():
